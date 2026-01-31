@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VXL 2026</title>
+
+  <!-- Core styles go here -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Pixelify Sans (primary UI font) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+  <!-- GSAP + ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+
+  <!-- Three.js (core only – idk how to do else) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r152/three.min.js" defer></script>
+
+  <!-- Main script -->
+  <script src="main.js" defer></script>
+</head>
+
+<body>
+<!-- HERO / LANDING -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-title">
+      <h1 class="studio-name">VOXEL ANIMATION</h1>
+    </div>
+    <p class="manifesto">Archives.</p>
+  </div>
+</section>
+
+
+  <!-- GALLERY -->
+
+  <section id="ongoing">
+    <h2 class="section-title">Ongoing Projects...</h2>
+    <div class="gallery">
+
+      <!-- Add more cool renders here pls -->
+      <figure class="gallery-item" data-title="Interim Dogma" data-desc="ren1">
+        <img src="assets/images/dogma.png" alt="Interim Dogma">
+        <figcaption>
+          <h3>Interim Dogma</h3>   <!-- Filled by JS on hover -->
+          <p>An illusory cyberspace.</p>    <!-- Filled by JS on hover -->
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-title="Cherry Grove" data-desc="ren2">
+        <img src="assets/images/banner.png" alt="Grove">
+        <figcaption>
+          <h3>A heartfelt grove</h3>
+          <p>Familiar fields of eternal dreams...</p>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-title="Cherry Grove" data-desc="ren3">
+        <img src="assets/images/Epic pose.png" alt="Control Center">
+        <figcaption>
+          <h3>Meet the Interface</h3>
+          <p>When survival calls, you either fight, or you die.</p>
+        </figcaption>
+      </figure>
+
+      <figure class="gallery-item" data-title="Cherry Grove" data-desc="A lasting compassion...">
+        <img src="assets/images/Convergent .png" alt="Grove">
+        <figcaption>
+          <h3>The Convergent Order</h3>
+          <p>When hubris meets salvation.</p>
+        </figcaption>
+      </figure>
+
+    </div>
+  </section>
+
+<!-- RESOURCES N STUFF -->
+  <section id="resources">
+    <h2 class="section-title">Resources</h2>
+    <p class="last-updated">Last updated : February 2026</p>
+    <div class="resource-grid">
+  
+      <!-- Screenplays (internal page) -->
+      <a href="/screenplays.html" class="resource-item">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Screenplays</span>
+      </a>
+  
+      <!-- Animation Team PDF -->
+      <a href="/assets/pdfs/animation-guide.pdf" class="resource-item">
+        <i class="fa-solid fa-file-pdf"></i>
+        <span>Animation Team</span>
+      </a>
+  
+      <!-- Rigs & Assets -->
+      <a href="/assets/pdfs/rigs-assets.pdf" class="resource-item">
+        <i class="fa-solid fa-cube"></i>
+        <span>Rigs & Assets</span>
+      </a>
+  
+      <!-- Events (internal page) -->
+      <a href="/events.html" class="resource-item">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Events</span>
+      </a>
+  
+    </div>
+  </section>
+
+
+  <!-- ABOUT SECTION -->
+
+  <section id="about">
+    <h2 class="section-title">About</h2>
+    <div class="about-content">
+      <p class="lead"><i>
+        "An auxiliary in milliards...  in lasting presence, in vast consequence."
+      </i>
+      </p>
+      <p><b>
+        Translating profound narratives into visceral 3D experiences.
+        From voxel to vision, we render stories to fruition.
+      </b>
+      </p>
+    </div>
+  </section>
+
+  <!-- CONTACT AND SOCIALS STUFF -->
+  <section id="contact">
+    <h2 class="section-title">Contact Us</h2>
+  
+    <div class="contact-links">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=voxelanimation25@gmail.com">
+        <i class="fa-solid fa-envelope"></i>
+        E-mail
+      </a>
+  
+      <a href="https://instagram.com/dead_voxels" target="_blank">
+        <i class="fa-brands fa-instagram"></i>
+        Instagram
+      </a>
+  
+      <a href="https://x.com/voxelanims25" target="_blank">
+        <i class="fa-brands fa-x-twitter"></i>
+        Twitter / X
+      </a>
+  
+      <a href="https://www.youtube.com/@VXLANIMS" target="_blank">
+        <i class="fa-brands fa-youtube"></i>
+        YouTube
+      </a>
+  
+      <a href="https://discord.gg/cGQ9DHYnyX" target="_blank">
+        <i class="fa-brands fa-discord"></i>
+        Discord
+      </a>
+    </div>
+  </section>
+
+  <!-- copyright RAHHHH -->
+  <footer>
+    ©2025-2026 VOXEL ANIMATION PVT. All rights reserved.
+  </footer>
+
+</body>
+</html>
