@@ -1,13 +1,13 @@
 :root {
   /* Core Palette */
-  --netherite-dark: #100e12;
-  --netherite-panel: #4f4f4f;
-  --netherite-border: #b30000;
+  --netherite-dark: #ffffff;
+  --netherite-panel: #3c3939;
+  --netherite-border: #ffffff;
   /* Cyber Accents */
-  --cyber-cyan: #0091ff;
-  --cyber-magenta: #ff0000;
+  --cyber-cyan: #ff0000;
+  --cyber-magenta: #ffffff;
   /* THE GLOW VARIABLE */
-  --hover-glow: #007bff;
+  --hover-glow: #ffffff;
   /* Text */
   --text-main: #ffffff;
 }
