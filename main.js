@@ -1,52 +1,85 @@
-/* main.js – Clean Video Version */
+/* main.js – ALWAYS REBOOT MODE */
 
 document.addEventListener("DOMContentLoaded", () => {
-  // 1. Boot Screen Logic
+  
   const bootEl = document.getElementById('boot');
+
+  // 1. RUN ON LOAD (Refresh)
   if (bootEl) {
-    if (sessionStorage.getItem('booted')) {
-      bootEl.style.display = 'none';
-      bootEl.remove();
-    } else {
-      runBootSequence(bootEl);
-    }
+    resetAndRunBoot(bootEl);
   }
 
-  // 2. Initialize Animations
+  // 2. RUN ON TAB IN (Tab Out/In)
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible' && bootEl) {
+      resetAndRunBoot(bootEl);
+    }
+  });
+
+  // 3. START OTHER SYSTEMS
   if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
     gsap.registerPlugin(ScrollTrigger);
     initScrollReveals();
   }
-  
-  // 3. Initialize Utilities
   initGallery();
   initAudio();
 });
 
-/* --- BOOT SEQUENCE --- */
-function runBootSequence(el) {
+
+/* --- BOOT SEQUENCE LOGIC --- */
+let bootInterval = null; // Store interval so we can stop it if needed
+
+function resetAndRunBoot(el) {
+  // RESET STATE
   const textEl = el.querySelector('.boot-text');
-  const lines = ["> INITIALIZING...", "> VIDEO_FEED_ESTABLISHED...", "> WELCOME."];
-  let i = 0;
-  const finish = () => {
-    sessionStorage.setItem('booted', 'true');
-    el.style.opacity = '0';
-    setTimeout(() => { if(el.parentNode) el.remove(); }, 500);
-  };
-  document.addEventListener('click', finish);
+  if(textEl) textEl.textContent = ""; // Clear old text
   
-  const interval = setInterval(() => {
+  el.style.display = 'flex';   // Make visible
+  el.style.opacity = '1';      // Reset fade
+  el.style.pointerEvents = 'auto'; // Re-enable clicking
+
+  // STOP previous loop if it was running
+  if (bootInterval) clearInterval(bootInterval);
+
+  // START SEQUENCE
+  const lines = [
+    "> LOADING CONVERGENT ARCHIVES...", 
+    "> INITIALIZING CONNECTION...", 
+    "> FEED ESTABLISHED...",
+    "> FETCHING KEY...",
+    "> FETCHING KEY...",
+    "> KEY FETCHED!",
+    "> ENCRYPTING KEY...",
+    "> ENCRYPTING KEY...",
+    "> ENCRYPTING KEY...",
+    "> KEY ENCRYPTED.",
+    "> WELCOME, PLAYER!"
+  ];
+  let i = 0;
+
+  const finish = () => {
+    el.style.opacity = '0';
+    el.style.pointerEvents = 'none'; // Click-through when hidden
+    // NOTE: We do NOT use el.remove() anymore, so we can run it again later.
+  };
+
+  // Skip on click
+  el.onclick = finish;
+
+  bootInterval = setInterval(() => {
     if (i < lines.length) {
       if(textEl) textEl.textContent += lines[i] + '\n';
       i++;
     } else {
-      clearInterval(interval);
-      setTimeout(finish, 800);
+      clearInterval(bootInterval);
+      setTimeout(finish, 6000);
     }
   }, 300);
 }
 
-/* --- SCROLL REVEALS --- */
+
+/* --- STANDARD FUNCTIONS --- */
+
 function initScrollReveals() {
   const tl = gsap.timeline();
   tl.from('.studio-name', { y: 30, opacity: 0, duration: 1 })
@@ -60,7 +93,6 @@ function initScrollReveals() {
   });
 }
 
-/* --- GALLERY --- */
 function initGallery() {
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => {
@@ -71,38 +103,29 @@ function initGallery() {
   createOverlay();
 }
 
-/* --- AUDIO --- */
 function initAudio() {
   const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
   
   function play(freq) {
     if (audioCtx.state === 'suspended') audioCtx.resume();
-    
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
-    
     osc.connect(gain);
     gain.connect(audioCtx.destination);
-    
-    // Sound Design: High-tech "chirp"
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
     gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
-    
     osc.start();
     osc.stop(audioCtx.currentTime + 0.1);
   }
 
-  // UPDATED SELECTOR: Added '.gallery-item' back to the list
   const targets = document.querySelectorAll('a, button, .resource-item, .gallery-item');
-  
   targets.forEach(el => {
-    el.addEventListener('mouseenter', () => play(670)); // High pitch on hover
-    el.addEventListener('mousedown', () => play(150));  // Low pitch on click
+    el.addEventListener('mouseenter', () => play(600));
+    el.addEventListener('mousedown', () => play(150));
   });
 }
 
-/* --- OVERLAY UTILS --- */
 function createOverlay() {
   if (document.getElementById('overlay')) return;
   const div = document.createElement('div');
