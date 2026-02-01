@@ -5,6 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>VXL 2026</title>
 
+  <script>
+    const savedTheme = JSON.parse(localStorage.getItem('vxl_theme_config'));
+    if (savedTheme) {
+      const root = document.documentElement;
+      Object.keys(savedTheme).forEach(key => {
+        root.style.setProperty(key, savedTheme[key]);
+      });
+    }
+  </script>
+
   <!-- Core styles go here -->
   <link rel="stylesheet" href="styles.css">
 
@@ -32,22 +42,44 @@
 
   <div id="boot">
     <div class="boot-terminal">
-      <div class="terminal-header">VXL_OS v2.6.0_NETHERITE</div>
+      <div class="terminal-header">CONVERGENT ORDER_OS v4.1.8</div>
       <div class="boot-text"></div>
       <div class="cursor">_</div>
+  
+      <div class="skip-hint">PRESS ANY KEY TO SKIP >></div>
     </div>
   </div>
-  
+
 <!-- HERO / LANDING -->
 <section id="hero">
-  <canvas id="hero-canvas"></canvas>
+  <video autoplay muted loop playsinline id="hero-video">
+    <source src="assets/videos/background_loop.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-overlay"></div>
+
   <div class="hero-content">
     <div class="hero-title">
-      <h1 class="studio-name">VOXEL ANIMATION</h1>
+      <h1 class="studio-name glitch" data-text="VOXEL ANIMATION">VOXEL ANIMATION</h1>
     </div>
-    <p class="manifesto">Archives.</p>
+    <p class="manifesto">Archives...</p>
   </div>
 </section>
+
+<div class="ticker-wrap">
+  <div class="ticker-content">
+    <span>:: SYSTEM STATUS : ONLINE ::</span>
+    <span>MEM_USAGE : 67%</span>
+    <span>RENDER_QUEUE : IDLE</span>
+    <span>LAST_LOGIN:
+      <script>document.write(new Date().toLocaleDateString())</script>
+    </span>
+    <span>:: NEW ASSETS DETECTED IN SECTOR 12 ::</span>
+    <span>OVERDRIVE: ENGAGED ::</span>
+    <span>CORE_THRESHOLD : STABLE ::</span>
+    <span>THE INTERFACE WELCOMES YOU! ::</span>
+  </div>
+</div>
 
 
   <!-- GALLERY -->
@@ -57,7 +89,7 @@
     <div class="gallery">
 
       <!-- Add more cool renders here pls -->
-      <figure class="gallery-item" data-title="Interim Dogma" data-desc="ren1">
+      <figure class="gallery-item" data-title="resc1" data-desc="ren1">
         <img src="assets/images/dogma.png" alt="Interim Dogma">
         <figcaption>
           <h3>Interim Dogma</h3>   <!-- Filled by JS on hover -->
@@ -65,15 +97,15 @@
         </figcaption>
       </figure>
 
-      <figure class="gallery-item" data-title="Cherry Grove" data-desc="ren2">
-        <img src="assets/images/banner.png" alt="Grove">
+      <figure class="gallery-item" data-title="resc2" data-desc="ren2">
+        <img src="assets/images/banner.png" alt="Cherry Grove">
         <figcaption>
           <h3>A heartfelt grove</h3>
           <p>Familiar fields of eternal dreams...</p>
         </figcaption>
       </figure>
 
-      <figure class="gallery-item" data-title="Cherry Grove" data-desc="ren3">
+      <figure class="gallery-item" data-title="resc3" data-desc="ren3">
         <img src="assets/images/Epic pose.png" alt="Control Center">
         <figcaption>
           <h3>Meet the Interface</h3>
@@ -81,11 +113,11 @@
         </figcaption>
       </figure>
 
-      <figure class="gallery-item" data-title="Cherry Grove" data-desc="A lasting compassion...">
-        <img src="assets/images/Convergent .png" alt="Grove">
+      <figure class="gallery-item" data-title="resc4" data-desc="ren4">
+        <img src="assets/images/Convergent .png" alt="Gold Farm">
         <figcaption>
           <h3>The Convergent Order</h3>
-          <p>When hubris meets salvation.</p>
+          <p>Meet the maker.</p>
         </figcaption>
       </figure>
 
@@ -99,7 +131,7 @@
     <div class="resource-grid">
   
       <!-- Screenplays (internal page) -->
-      <a href="/screenplays.html" class="resource-item">
+      <a href="pages/screenplays.html" class="resource-item">
         <i class="fa-solid fa-layer-group"></i>
         <span>Screenplays</span>
       </a>
@@ -117,7 +149,7 @@
       </a>
   
       <!-- Events (internal page) -->
-      <a href="/events.html" class="resource-item">
+      <a href="pages/events.html" class="resource-item">
         <i class="fa-solid fa-calendar-days"></i>
         <span>Events</span>
       </a>
@@ -173,6 +205,21 @@
         Discord
       </a>
     </div>
+  </section>
+
+  <section id="cloud-portal"
+    style="padding: 3rem 1rem; text-align: center; background: linear-gradient(0deg, #050505, #0a0a0a); border-top: 1px solid var(--netherite-border);">
+  
+    <h3 style="color: var(--text-main); font-family: 'Pixelify Sans'; margin-bottom: 1.5rem; opacity: 0.7;">STAFF PORTAL</h3>
+  
+    <div style="display: flex; justify-content: center;">
+      <a href="https://cloud.staying-loud.com/apps/dashboard/" target="_blank" class="resource-item"
+        style="width: auto; padding: 1rem 3rem; border-left: 1px solid var(--netherite-border);">
+        <i class="fa-solid fa-server" style="color: var(--cyber-magenta);"></i>
+        <span style="font-weight: bold; letter-spacing: 2px;">LAUNCH CLOUD DASHBOARD</span>
+      </a>
+    </div>
+  
   </section>
 
   <!-- copyright RAHHHH -->

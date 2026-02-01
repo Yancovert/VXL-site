@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Transmission Log | Convergent Order Interface</title>
+
+    <script>
+        const savedTheme = JSON.parse(localStorage.getItem('vxl_theme_config'));
+        if (savedTheme) {
+            const root = document.documentElement;
+            Object.keys(savedTheme).forEach(key => {
+                root.style.setProperty(key, savedTheme[key]);
+            });
+        }
+    </script>
+
+    <link rel="stylesheet" href="../styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body style="background: #050505; padding-top: 80px;">
+
+    <nav style="position:fixed; top:20px; left:20px; z-index:100;">
+        <a href="../index.html" class="resource-item" style="padding: 0.5rem 1rem;">
+            <i class="fa-solid fa-arrow-left"></i> RETURN_SIGNAL
+        </a>
+    </nav>
+
+    <section id="events" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+        <h2 class="section-title">UPCOMING TRANSMISSIONS</h2>
+
+        <div class="event-card" style="margin-bottom: 2rem;">
+            <div class="date-badge">MAR 15, 2026</div>
+            <div class="resource-item" style="flex-direction: column; align-items: flex-start;">
+                <h3 style="color: var(--cyber-cyan); font-size: 1.5rem;">The Voxel Summit</h3>
+                <p style="color: #aaa; margin-top: 0.5rem;">
+                    Annual gathering of the high-poly council. Discussion topics: Render pipelines and the future of
+                    cubic storytelling.
+                </p>
+                <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--cyber-magenta);">
+                    <i class="fa-solid fa-location-dot"></i> HYPER_REGION_1 // DISCORD STAGE
+                </div>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <div class="date-badge">APR 02, 2026</div>
+            <div class="resource-item" style="flex-direction: column; align-items: flex-start;">
+                <h3 style="color: var(--cyber-cyan); font-size: 1.5rem;">Project: DOGMA - Public Beta</h3>
+                <p style="color: #aaa; margin-top: 0.5rem;">
+                    First public access to the Dogma server. Whitelist applications open at 00:00 EST.
+                </p>
+                <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--cyber-magenta);">
+                    <i class="fa-solid fa-server"></i> SERVER: PLAY.VXL.NET
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <style>
+        .date-badge {
+            display: inline-block;
+            background: var(--cyber-magenta);
+            color: #000;
+            font-weight: bold;
+            padding: 0.2rem 0.8rem;
+            margin-bottom: -10px;
+            margin-left: 1rem;
+            position: relative;
+            z-index: 2;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+
+</body>
+
+</html>

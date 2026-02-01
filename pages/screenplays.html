@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VXL // CONVERGENT ARCHIVES</title>
+
+    <link rel="stylesheet" href="../styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+
+<body>
+
+    <nav style="padding: 2rem;">
+        <a href="../index.html" class="resource-item" style="display:inline-flex; width:auto; padding: 0.8rem 1.5rem;">
+            <i class="fa-solid fa-arrow-left"></i>
+            <span>RETURN_TO_INTERFACE</span>
+        </a>
+    </nav>
+
+    <main style="max-width: 1000px; margin: 0 auto; text-align: center; margin-top: 5vh;">
+
+        <h1 class="section-title">SCREENPLAY ARCHIVES</h1>
+
+        <div class="resource-grid"
+            style="justify-content: center; margin-top: 3rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+
+            <a href="../assets/pdfs/AMORPHOUS PASSE.pdf" target="_blank" class="resource-item">
+                <i class="fa-solid fa-file-pdf" style="color: var(--cyber-cyan);"></i>
+                <span>Project: AMORPHOUS PASSE</span>
+            </a>
+
+            <a href="../assets/pdfs/AMORPHOUS PROGENY.pdf" target="_blank" class="resource-item">
+                <i class="fa-solid fa-file-lines" style="color: var(--cyber-cyan);"></i>
+                <span>Project: AMORPHOUS PROGENY</span>
+            </a>
+
+            <a href="../assets/pdfs/AMORPHOUS PRAXIS.pdf" target="_blank" class="resource-item">
+                <i class="fa-solid fa-file-lines" style="color: var(--cyber-cyan);"></i>
+                <span>Project: AMORPHOUS PRAXIS</span>
+            </a>
+
+            <a href="../assets/pdfs/Miscellaneous.pdf" target="_blank" class="resource-item">
+                <i class="fa-solid fa-file-lines" style="color: var(--cyber-cyan);"></i>
+                <span>Project: Miscellaneous</span>
+            </a>
+
+            <div class="resource-item" style="opacity: 0.4; cursor: not-allowed; border-color: #444;">
+                <i class="fa-solid fa-lock" style="color: #666;"></i>
+                <span style="color: #666;">(REDACTED)</span>
+            </div>
+
+        </div>
+
+        <p style="margin-top: 5rem; color: #444; font-family: 'Courier New'; font-size: 0.8rem; letter-spacing: 2px;">
+            CRYSTAL CORE THRESHOLD STATUS: STABLE
+        </p>
+
+    </main>
+
+    <script>
+        const savedTheme = JSON.parse(localStorage.getItem('vxl_theme_config'));
+        if (savedTheme) {
+            Object.keys(savedTheme).forEach(key => {
+                document.documentElement.style.setProperty(key, savedTheme[key]);
+            });
+        }
+    </script>
+
+</body>
+
+</html>

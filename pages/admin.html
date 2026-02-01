@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>VXL_CORE // ADMIN</title>
+
+    <link rel="stylesheet" href="../styles.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="admin-mode">
+
+    <nav style="margin-bottom: 2rem;">
+        <a href="../index.html" class="resource-item" style="display:inline-block; padding: 0.5rem 1rem;">
+            &lt; HI XEL!
+        </a>
+    </nav>
+
+    <div class="admin-panel">
+        <h1 class="section-title" style="text-align: left; font-size: 2rem; margin-bottom: 1rem;">SYSTEM CONFIGURATION
+        </h1>
+
+        <div class="control-group">
+            <h3>QUICK THEMES</h3>
+            <div style="margin-top: 1rem;">
+                <button class="preset-btn" onclick="applyPreset('default')">DEFAULT</button>
+                <button class="preset-btn" onclick="applyPreset('crimson')">REDSTONE</button>
+                <button class="preset-btn" onclick="applyPreset('gold')">GOLD</button>
+                <button class="preset-btn" onclick="applyPreset('matrix')">GRASS</button>
+            </div>
+        </div>
+
+        <div class="control-group">
+            <h3>COLOR PALETTE</h3>
+
+            <div class="control-row">
+                <label>PRIMARY ACCENT (--cyber-cyan)</label>
+                <input type="color" id="picker-cyan" value="#00fff8">
+            </div>
+
+            <div class="control-row">
+                <label>SECONDARY ACCENT (--cyber-magenta)</label>
+                <input type="color" id="picker-magenta" value="#ff00f6">
+            </div>
+
+            <div class="control-row">
+                <label style="color: #fff; font-weight:bold;">BUTTON GLOW (--hover-glow)</label>
+                <input type="color" id="picker-glow" value="#ff00f6">
+            </div>
+
+            <div class="control-row">
+                <label>TEXT COLOR (--text-main)</label>
+                <input type="color" id="picker-text" value="#e0e0e0">
+            </div>
+
+            <div class="control-row">
+                <label>PANEL BACKGROUND (--netherite-panel)</label>
+                <input type="color" id="picker-panel" value="#1a161d">
+            </div>
+
+            <div class="control-row">
+                <label>BORDER COLOR (--netherite-border)</label>
+                <input type="color" id="picker-border" value="#3d3442">
+            </div>
+        </div>
+
+        <button class="save-btn" onclick="saveConfig()">[ SAVE CONFIGURATION ]</button>
+        <p id="status" style="margin-top:1rem; color: #00ff41; height: 20px; font-family: 'Courier New';"></p>
+    </div>
+
+    <script>
+        // 1. SETUP VARIABLES
+        const inputs = {
+            '--cyber-cyan': document.getElementById('picker-cyan'),
+            '--cyber-magenta': document.getElementById('picker-magenta'),
+            '--hover-glow': document.getElementById('picker-glow'),
+            '--text-main': document.getElementById('picker-text'),
+            '--netherite-panel': document.getElementById('picker-panel'),
+            '--netherite-border': document.getElementById('picker-border')
+        };
+
+        // 2. LOAD CURRENT VALUES
+        const saved = JSON.parse(localStorage.getItem('vxl_theme_config'));
+        if (saved) {
+            for (const [key, val] of Object.entries(saved)) {
+                if (inputs[key]) inputs[key].value = val;
+                document.documentElement.style.setProperty(key, val);
+            }
+        }
+
+        // 3. LIVE PREVIEW
+        Object.keys(inputs).forEach(key => {
+            inputs[key].addEventListener('input', (e) => {
+                document.documentElement.style.setProperty(key, e.target.value);
+            });
+        });
+
+        // 4. PRESET LOGIC
+        function applyPreset(name) {
+            const presets = {
+                default: { '--cyber-cyan': '#00fff8', '--cyber-magenta': '#ff00f6', '--hover-glow': '#ff00f6', '--netherite-panel': '#1a161d' },
+                crimson: { '--cyber-cyan': '#ff0000', '--cyber-magenta': '#800000', '--hover-glow': '#ff0000', '--netherite-panel': '#150505' },
+                gold: { '--cyber-cyan': '#ffd700', '--cyber-magenta': '#ffaa00', '--hover-glow': '#ffaa00', '--netherite-panel': '#1a1810' },
+                matrix: { '--cyber-cyan': '#00ff41', '--cyber-magenta': '#008f11', '--hover-glow': '#00ff41', '--netherite-panel': '#001100' }
+            };
+
+            const theme = presets[name];
+            if (!theme) return;
+
+            for (const [key, val] of Object.entries(theme)) {
+                if (inputs[key]) inputs[key].value = val;
+                document.documentElement.style.setProperty(key, val);
+            }
+        }
+
+        // 5. SAVE FUNCTION
+        function saveConfig() {
+            const config = {};
+            Object.keys(inputs).forEach(key => {
+                config[key] = inputs[key].value;
+            });
+
+            localStorage.setItem('vxl_theme_config', JSON.stringify(config));
+
+            const status = document.getElementById('status');
+            status.innerText = "> SYSTEM UPDATED. CHANGES LIVE.";
+            setTimeout(() => status.innerText = "", 3000);
+        }
+    </script>
+</body>
+
+</html>
