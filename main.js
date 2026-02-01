@@ -53,6 +53,7 @@ function resetAndRunBoot(el) {
     "> ENCRYPTING KEY...",
     "> ENCRYPTING KEY...",
     "> KEY ENCRYPTED.",
+    "> RESOLVING DELTAS...",
     "> WELCOME, PLAYER!"
   ];
   let i = 0;
