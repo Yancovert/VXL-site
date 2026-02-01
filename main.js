@@ -10,6 +10,15 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+// DEFINE BOOT TEXT LINES
+const bootLines = [
+  "> INITIALIZING VXL_CORE...",
+  "> LOADING NETHERITE_UI_MODULES...",
+  "> CONNECTING TO NEURAL_LINK...",
+  "> CALIBRATING SHADERS...",
+  "> ACCESS GRANTED.",
+  "> WELCOME, OPERATOR."
+];
 
 const bootEl = document.getElementById('boot');
 const bootText = document.querySelector('.boot-text');
