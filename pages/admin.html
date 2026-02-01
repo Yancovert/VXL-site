@@ -36,32 +36,32 @@
             <h3>COLOR PALETTE</h3>
 
             <div class="control-row">
-                <label>PRIMARY ACCENT (--cyber-cyan)</label>
+                <label>PRIMARY ACCENT (cyber-cyan)</label>
                 <input type="color" id="picker-cyan" value="#00fff8">
             </div>
 
             <div class="control-row">
-                <label>SECONDARY ACCENT (--cyber-magenta)</label>
+                <label>SECONDARY ACCENT (cyber-magenta)</label>
                 <input type="color" id="picker-magenta" value="#ff00f6">
             </div>
 
             <div class="control-row">
-                <label style="color: #fff; font-weight:bold;">BUTTON GLOW (--hover-glow)</label>
+                <label style="color: #fff; font-weight:bold;">BUTTON GLOW (hover-glow)</label>
                 <input type="color" id="picker-glow" value="#ff00f6">
             </div>
 
             <div class="control-row">
-                <label>TEXT COLOR (--text-main)</label>
+                <label>TEXT COLOR (text-main)</label>
                 <input type="color" id="picker-text" value="#e0e0e0">
             </div>
 
             <div class="control-row">
-                <label>PANEL BACKGROUND (--netherite-panel)</label>
+                <label>PANEL BACKGROUND (netherite-panel)</label>
                 <input type="color" id="picker-panel" value="#1a161d">
             </div>
 
             <div class="control-row">
-                <label>BORDER COLOR (--netherite-border)</label>
+                <label>BORDER COLOR (netherite-border)</label>
                 <input type="color" id="picker-border" value="#3d3442">
             </div>
         </div>
@@ -128,7 +128,43 @@
             status.innerText = "> SYSTEM UPDATED. CHANGES LIVE.";
             setTimeout(() => status.innerText = "", 3000);
         }
+
+        function copyThemeToClipboard() {
+            const root = document.documentElement;
+            const computed = getComputedStyle(root);
+            const cssBlock = `:root {
+            /* Core Palette */
+            --netherite-dark: ${computed.getPropertyValue('--netherite-dark').trim()};
+            --netherite-panel: ${computed.getPropertyValue('--netherite-panel').trim()};
+            --netherite-border: ${computed.getPropertyValue('--netherite-border').trim()};
+            /* Cyber Accents */
+            --cyber-cyan: ${computed.getPropertyValue('--cyber-cyan').trim()};
+            --cyber-magenta: ${computed.getPropertyValue('--cyber-magenta').trim()};
+            /* THE GLOW VARIABLE */
+            --hover-glow: ${computed.getPropertyValue('--hover-glow').trim()};
+            /* Text */
+            --text-main: ${computed.getPropertyValue('--text-main').trim()};}`;
+
+            navigator.clipboard.writeText(cssBlock).then(() => {
+                alert("THEME COPIED!\n\nPaste this into the root blocak of your styles.css now.");
+            });
+        }
+
     </script>
+
+    <button onclick="copyThemeToClipboard()" style="
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #00ff00;
+            color: black;
+            border: none;
+            font-family: monospace;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        ">
+        [ TERMINAL ] COPY CSS CONFIG
+    </button>
 </body>
 
 </html>

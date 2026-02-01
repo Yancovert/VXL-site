@@ -1,18 +1,15 @@
 :root {
   /* Core Palette */
   --netherite-dark: #100e12;
-  --netherite-panel: #1a161d;
-  --netherite-border: #3d3442;
-
+  --netherite-panel: #4f4f4f;
+  --netherite-border: #b30000;
   /* Cyber Accents */
-  --cyber-cyan: #00fff8;
-  --cyber-magenta: #ff00f6;
-
-  /* THE GLOW VARIABLE (Controlled by Admin Panel) */
-  --hover-glow: #ff00f6;
-
+  --cyber-cyan: #0091ff;
+  --cyber-magenta: #ff0000;
+  /* THE GLOW VARIABLE */
+  --hover-glow: #007bff;
   /* Text */
-  --text-main: #e0e0e0;
+  --text-main: #ffffff;
 }
 
 /* Global Reset & Typography */
