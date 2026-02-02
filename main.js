@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
   initGallery();
   initAudio();
+  initSidebar();
 });
 
 
@@ -82,16 +83,46 @@ function resetAndRunBoot(el) {
 /* --- STANDARD FUNCTIONS --- */
 
 function initScrollReveals() {
-  const tl = gsap.timeline();
-  tl.from('.studio-name', { y: 30, opacity: 0, duration: 1 })
-    .from('.manifesto', { y: 20, opacity: 0, duration: 1 }, "-=0.5");
-  
-  document.querySelectorAll('#ongoing, #about, #contact').forEach(sec => {
-    gsap.from(sec, {
-      y: 50, opacity: 0, duration: 1, 
-      scrollTrigger: { trigger: sec, start: 'top 80%' }
+  // 1. Define what we want to animate
+  // This selects titles, paragraphs, gallery items, resource cards, and contact links
+  const elements = gsap.utils.toArray(`
+    .section-title, 
+    .about-content, 
+    .gallery-item, 
+    .resource-item, 
+    .contact-links a,
+    .resource-grid,
+    form,
+    footer
+  `);
+
+  // 2. Apply the animation to each one
+  elements.forEach(el => {
+    gsap.from(el, {
+      y: 50,              // Move up by 50px
+      opacity: 0,         // Start invisible
+      duration: 1,        // Take 1 second to fade in
+      ease: "power3.out", // Smooth "braking" ease
+      
+      scrollTrigger: {
+        trigger: el,
+        start: "top 85%", // Start when top of element hits 85% of screen height
+        
+        // OPTIONS:
+        // "play"    = fade in when scrolling down
+        // "reverse" = fade out when scrolling up (so it can fade in again!)
+        toggleActions: "play none none reverse" 
+      }
     });
   });
+
+  // 3. Special handling for the Hero Text (Keep it separate so it doesn't glitch)
+  // Only runs if the hero actually exists on this page
+  if (document.querySelector('.studio-name')) {
+    const tl = gsap.timeline();
+    tl.from('.studio-name', { y: 30, opacity: 0, duration: 1 })
+      .from('.manifesto', { y: 20, opacity: 0, duration: 1 }, "-=0.5");
+  }
 }
 
 function initGallery() {
@@ -145,4 +176,30 @@ function openOverlay(src, title, desc) {
   el.querySelector('p').textContent = desc || '';
   el.querySelector('.info').style.color = '#fff';
   el.style.display = 'flex';
+}
+
+function initSidebar() {
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-link");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Remove active class from all
+        navLinks.forEach(link => link.classList.remove("active"));
+        
+        // Add active class to the current section's link
+        const id = entry.target.getAttribute("id");
+        const activeLink = document.querySelector(`.nav-link[data-target="${id}"]`);
+        if (activeLink) {
+          activeLink.classList.add("active");
+        }
+      }
+    });
+  }, {
+    threshold: 0.3, /* Triggers when 30% of section is visible */
+    rootMargin: "-10% 0px -50% 0px" /* Adjusts the trigger zone to the middle of screen */
+  });
+
+  sections.forEach(section => observer.observe(section));
 }
