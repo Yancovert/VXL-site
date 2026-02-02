@@ -761,3 +761,64 @@ input[type="color"] {
     display: none;
   }
 }
+
+/* --- CUSTOM SCROLLBAR --- */
+/* Width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track (Background) */
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+/* Handle (The moving part) */
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-cyan);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--cyber-cyan);
+  /* Glowing effect */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+
+@keyframes jitter {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  25% {
+    transform: translate(-2px, 2px);
+  }
+
+  50% {
+    transform: translate(2px, -2px);
+  }
+
+  75% {
+    transform: translate(-2px, -2px);
+  }
+
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* --- CUSTOM TEXT SELECTION --- */
+::selection {
+  background: var(--cyber-magenta);
+  /* Background becomes pink */
+  color: #fff;
+  /* Text becomes white */
+  text-shadow: 0 0 5px #fff;
+}
+
+/* Firefox specific */
+::-moz-selection {
+  background: var(--cyber-magenta);
+  color: #fff;
+}
