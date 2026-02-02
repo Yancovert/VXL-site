@@ -1,18 +1,26 @@
+/* =========================================
+   1. VARIABLES & THEME CONFIGURATION
+   ========================================= */
 :root {
   /* Core Palette */
   --netherite-dark: #ffffff;
   --netherite-panel: #3c3939;
   --netherite-border: #ffffff;
+
   /* Cyber Accents */
   --cyber-cyan: #ff0000;
   --cyber-magenta: #ffffff;
-  /* THE GLOW VARIABLE */
+
+  /* UI Feedback */
   --hover-glow: #ffffff;
-  /* Text */
+
+  /* Typography */
   --text-main: #ffffff;
 }
 
-/* Global Reset & Typography */
+/* =========================================
+   2. GLOBAL RESET & TYPOGRAPHY
+   ========================================= */
 *,
 *::before,
 *::after {
@@ -23,18 +31,25 @@
 
 html {
   scroll-behavior: smooth;
+  /* Note: Remove 'cursor: crosshair' if you want the standard pointer */
+  /* cursor: crosshair; */
 }
 
 body {
   font-family: 'Pixelify Sans', sans-serif;
   color: #e0e0e0;
+  /* Fallback */
+  color: var(--text-main);
+  /* Variable Override */
   background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
   line-height: 1.6;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* LINKS (Generic) */
+/* =========================================
+   3. UI COMPONENTS (Links, Buttons)
+   ========================================= */
 a {
   text-decoration: none;
   color: #00fff8;
@@ -47,15 +62,12 @@ a:hover {
   text-shadow: 0 0 5px var(--hover-glow);
 }
 
-/* --- BUTTONS (Sleek & Shiny) --- */
 button {
   background: linear-gradient(180deg, rgba(30, 30, 30, 1) 0%, rgba(10, 10, 10, 1) 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 6px;
-  /* Sleek tight corners */
   color: var(--cyber-cyan);
   padding: 0.6rem 1.2rem;
-  /* Compact padding */
   font-family: 'Pixelify Sans', sans-serif;
   text-transform: uppercase;
   font-weight: 600;
@@ -63,13 +75,7 @@ button {
   cursor: pointer;
   position: relative;
   overflow: hidden;
-
-  /* The Subtle Shine */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    /* Sharp top lip */
-    0 4px 10px rgba(0, 0, 0, 0.5);
-
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 10px rgba(0, 0, 0, 0.5);
   transition: all 0.2s cubic-bezier(0.25, 1.5, 0.5, 1);
 }
 
@@ -77,20 +83,50 @@ button:hover {
   transform: translateY(-2px);
   color: var(--hover-glow);
   border-color: var(--hover-glow);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    0 0 15px var(--hover-glow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 15px var(--hover-glow);
 }
 
 button:active {
   transform: translateY(1px);
 }
 
-/* --- SECTION TITLES --- */
+/* Selection Highlight */
+::selection {
+  background: var(--cyber-magenta);
+  color: #fff;
+  text-shadow: 0 0 5px #fff;
+}
+
+::-moz-selection {
+  background: var(--cyber-magenta);
+  color: #fff;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-cyan);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--cyber-cyan);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #fff;
+}
+
+/* =========================================
+   4. SECTIONS & LAYOUT
+   ========================================= */
 .section-title {
   font-family: 'Pixelify Sans', sans-serif;
   font-size: 2.5rem;
-  /* Reduced from 3rem */
   font-weight: 700;
   text-align: center;
   margin-bottom: 2.5rem;
@@ -99,16 +135,41 @@ button:active {
   text-shadow: 0 0 10px rgba(0, 255, 248, 0.4);
 }
 
-/* --- HERO SECTION (Video Background) --- */
+#ongoing,
+#resources,
+#about,
+#contact {
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+/* Pulsing Border Separators */
+#ongoing::before,
+#resources::before,
+#about::before,
+#contact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100vw;
+  height: 1px;
+  background-color: #ffffff;
+  animation: borderPulse 3s infinite ease-in-out;
+  z-index: 10;
+}
+
+/* =========================================
+   5. HERO SECTION
+   ========================================= */
 #hero {
   position: relative;
   height: 90vh;
   overflow: hidden;
   background: #000;
-  /* Fallback color */
 }
 
-/* The Video itself */
 #hero-video {
   position: absolute;
   top: 50%;
@@ -118,19 +179,12 @@ button:active {
   width: auto;
   height: auto;
   z-index: 0;
-  /* Bottom layer */
   transform: translate(-50%, -50%);
-  /* Centers the video */
-
-  /* VISIBILITY SETTINGS */
   opacity: 0.9;
-  /* Reduces visibility as requested */
   filter: contrast(1.2) brightness(0.9);
-  /* Optional: Tweak look */
   object-fit: cover;
 }
 
-/* The Dark Overlay (Optional extra readability) */
 .video-overlay {
   position: absolute;
   top: 0;
@@ -139,10 +193,8 @@ button:active {
   height: 100%;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.42) 0%, #0a0a0a 100%);
   z-index: 1;
-  /* Sits on top of video, below text */
 }
 
-/* Ensure Text sits on top */
 .hero-content {
   position: relative;
   z-index: 2;
@@ -160,6 +212,7 @@ button:active {
   font-size: 4rem;
   font-weight: 700;
   color: #8c010100;
+  /* Transparent */
   position: relative;
   animation: titlePulse 4.5s ease-in-out infinite;
 }
@@ -180,31 +233,7 @@ button:active {
   margin-top: 0.5rem;
 }
 
-@keyframes titlePulse {
-
-  0%,
-  100% {
-    text-shadow: 0 0 20px rgba(0, 76, 255, 0.4);
-    opacity: 0.95;
-  }
-
-  50% {
-    text-shadow: 0 0 35px rgba(255, 0, 246, 0.3);
-    opacity: 1;
-  }
-}
-
-@keyframes scan {
-  0% {
-    background-position-y: 0;
-  }
-
-  100% {
-    background-position-y: 4px;
-  }
-}
-
-/* --- SYSTEM TICKER --- */
+/* System Ticker (Below Hero) */
 .ticker-wrap {
   width: 100%;
   overflow: hidden;
@@ -235,17 +264,9 @@ button:active {
   color: var(--cyber-magenta);
 }
 
-@keyframes ticker {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
-}
-
-/* --- GALLERY --- */
+/* =========================================
+   6. GALLERY SECTION
+   ========================================= */
 #works {
   padding: 4rem 2rem;
   background: linear-gradient(180deg, #0a0a0a 0%, #111 100%);
@@ -254,8 +275,8 @@ button:active {
 .gallery {
   display: grid;
   gap: 1.5rem;
-  /* Fixed: Reduced min-width to prevent huge tiles on small screens */
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin-bottom: 2rem;
 }
 
 .gallery-item {
@@ -263,17 +284,8 @@ button:active {
   overflow: hidden;
   cursor: pointer;
   border-radius: 8px;
-  /* Sleeker radius */
-
-  /* Background: Solid dark glass (High Contrast) */
   background: #080808;
-
-  /* The "Crystal" Shine */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.3),
-    /* Sharp top highlight */
-    0 5px 15px rgba(0, 0, 0, 0.6);
-
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 5px 15px rgba(0, 0, 0, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
 }
@@ -283,17 +295,13 @@ button:active {
   height: auto;
   display: block;
   opacity: 0.9;
-  /* Slightly dimmed to pop on hover */
   transition: transform 0.5s ease, opacity 0.3s ease, filter 0.3s ease;
 }
 
-/* Hover State */
 .gallery-item:hover {
   transform: scale(1.02) translateY(-3px);
   border-color: var(--hover-glow);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 0 20px var(--hover-glow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), 0 0 20px var(--hover-glow);
   z-index: 10;
 }
 
@@ -303,6 +311,27 @@ button:active {
   transform: scale(1.05);
 }
 
+/* Gallery Holo-Scanner Effect */
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent 45%, rgba(0, 255, 248, 0.2) 50%, transparent 55%);
+  background-size: 100% 200%;
+  animation: scanner 3s linear infinite;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.5;
+}
+
+.gallery-item:hover::after {
+  opacity: 0;
+}
+
+/* Gallery Caption */
 .gallery-item figcaption {
   position: absolute;
   inset: 0;
@@ -332,27 +361,14 @@ button:active {
   color: #ccc;
 }
 
-/* Update this block to target the REAL IDs from HTML */
-#ongoing,
-#resources {
-  padding: 4rem 2rem;
-  /* Adds space above and below the content */
-  position: relative;
-  /* keeps the border anchored */
-}
-
-/* Ensure the grid doesn't touch the bottom edges */
-.resource-grid,
-.gallery {
-  margin-bottom: 2rem;
-  /* Extra breathing room above the border */
-}
-
-/* --- RESOURCES (Sleek Tiles) --- */
+/* =========================================
+   7. RESOURCES SECTION
+   ========================================= */
 .resource-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .resource-item {
@@ -361,19 +377,11 @@ button:active {
   align-items: center;
   gap: 0.8rem;
   padding: 1.2rem;
-  /* Compact padding */
-
-  /* Obsidian Base */
   background: linear-gradient(145deg, #151515, #0a0a0a);
   border-radius: 8px;
   text-decoration: none;
   color: var(--text-main);
-
-  /* Subtle Shine */
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.2),
-    0 4px 10px rgba(0, 0, 0, 0.5);
-
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 4px 10px rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.3s cubic-bezier(0.25, 1.5, 0.5, 1);
   font-family: 'Pixelify Sans', monospace;
@@ -389,9 +397,7 @@ button:active {
 .resource-item:hover {
   transform: translateY(-2px);
   border-color: var(--hover-glow);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.4),
-    0 0 15px var(--hover-glow);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 0 15px var(--hover-glow);
 }
 
 .resource-item:hover i {
@@ -399,7 +405,9 @@ button:active {
   text-shadow: 0 0 8px var(--hover-glow);
 }
 
-/* --- ABOUT & CONTACT --- */
+/* =========================================
+   8. ABOUT, CONTACT & FOOTER
+   ========================================= */
 #about {
   padding: 4rem 2rem;
   max-width: 800px;
@@ -443,7 +451,6 @@ button:active {
   transform: translateY(-3px);
 }
 
-/* --- FOOTER --- */
 footer {
   padding: 2rem;
   text-align: center;
@@ -452,7 +459,11 @@ footer {
   background: #050505;
 }
 
-/* --- BOOT SCREEN --- */
+/* =========================================
+   9. OVERLAYS (Boot, Sidebar, Admin)
+   ========================================= */
+
+/* Boot Screen */
 #boot {
   position: fixed;
   inset: 0;
@@ -496,64 +507,64 @@ footer {
   animation: blink 2s infinite;
 }
 
-@keyframes blink {
-  50% {
-    opacity: 0;
-  }
+/* Side Navigation (Mappa Style) */
+#side-nav {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 999;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  mix-blend-mode: difference;
 }
 
-/* --- GLITCH EFFECT --- */
-.glitch {
+.nav-line {
+  width: 2px;
+  height: 200px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+}
+
+#side-nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+#side-nav a {
+  text-decoration: none;
+  font-family: 'Pixelify Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  display: block;
   position: relative;
+}
+
+#side-nav a:hover {
+  color: #fff;
+  transform: translateX(5px);
+}
+
+#side-nav a.active {
   color: var(--cyber-cyan);
+  text-shadow: 0 0 10px var(--cyber-cyan);
+  transform: scale(1.1) translateX(5px);
 }
 
-.glitch::before,
-.glitch::after {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0a0a0a;
-}
-
-.glitch::before {
-  left: 2px;
-  text-shadow: -1px 0 #ff00f6;
-  clip: rect(24px, 550px, 90px, 0);
-  animation: glitch-anim-1 3s infinite linear alternate-reverse;
-}
-
-.glitch::after {
-  left: -2px;
-  text-shadow: -1px 0 #00fff8;
-  clip: rect(85px, 550px, 140px, 0);
-  animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
-}
-
-@keyframes glitch-anim-1 {
-  0% {
-    clip: rect(20px, 9999px, 15px, 0);
-  }
-
-  100% {
-    clip: rect(70px, 9999px, 100px, 0);
+@media (max-width: 768px) {
+  #side-nav {
+    display: none;
   }
 }
 
-@keyframes glitch-anim-2 {
-  0% {
-    clip: rect(10px, 9999px, 90px, 0);
-  }
-
-  100% {
-    clip: rect(90px, 9999px, 10px, 0);
-  }
-}
-
-/* --- ADMIN PANEL --- */
+/* Admin Panel Mode */
 body.admin-mode {
   background: #000 !important;
   padding: 2rem;
@@ -626,24 +637,49 @@ input[type="color"] {
   color: var(--cyber-magenta);
 }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 3rem;
-  }
-
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .gallery {
-    grid-template-columns: 1fr;
+/* =========================================
+   10. ANIMATIONS & FX
+   ========================================= */
+@keyframes blink {
+  50% {
+    opacity: 0;
   }
 }
 
-/* --- PULSING BORDER SEPARATORS --- */
+@keyframes titlePulse {
 
-/* 1. The Animation Keyframes */
+  0%,
+  100% {
+    text-shadow: 0 0 20px rgba(0, 76, 255, 0.4);
+    opacity: 0.95;
+  }
+
+  50% {
+    text-shadow: 0 0 35px rgba(255, 0, 246, 0.3);
+    opacity: 1;
+  }
+}
+
+@keyframes scan {
+  0% {
+    background-position-y: 0;
+  }
+
+  100% {
+    background-position-y: 4px;
+  }
+}
+
+@keyframes ticker {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
 @keyframes borderPulse {
   0% {
     opacity: 0.2;
@@ -653,7 +689,6 @@ input[type="color"] {
   50% {
     opacity: 1;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
-    /* The Glow */
   }
 
   100% {
@@ -662,128 +697,34 @@ input[type="color"] {
   }
 }
 
-/* 2. Target the Sections (Gallery, Resources, About, Contact) */
-#ongoing,
-#resources,
-#about,
-#contact {
-  position: relative;
-  /* Needed to anchor the line */
-}
+@keyframes glitch-anim-1 {
+  0% {
+    clip: rect(20px, 9999px, 15px, 0);
+  }
 
-/* 3. Create the Line */
-#ongoing::before,
-#resources::before,
-#about::before,
-#contact::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  /* Start at center */
-  transform: translateX(-50%);
-  /* Center perfectly */
-
-  width: 100vw;
-  /* Full width (change to 90% if you want gaps on sides) */
-  height: 1px;
-  /* Very thin and sleek */
-  background-color: #ffffff;
-
-  /* Apply the animation */
-  animation: borderPulse 3s infinite ease-in-out;
-  z-index: 10;
-}
-
-/* --- VERTICAL SIDEBAR (MAPPA STYLE) --- */
-#side-nav {
-  position: fixed;
-  left: 2rem;
-  /* Distance from left edge */
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 999;
-  /* Stays on top of everything */
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  mix-blend-mode: difference;
-  /* Optional: Cool effect over white/black bg */
-}
-
-/* The Vertical Line */
-.nav-line {
-  width: 2px;
-  height: 200px;
-  /* Height of the bar */
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 2px;
-}
-
-#side-nav ul {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  /* Spacing between words */
-}
-
-#side-nav a {
-  text-decoration: none;
-  font-family: 'Pixelify Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: bold;
-  color: rgba(255, 255, 255, 0.3);
-  /* Default: Dimmed */
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  transition: all 0.3s ease;
-  display: block;
-  position: relative;
-}
-
-/* Hover State */
-#side-nav a:hover {
-  color: #fff;
-  transform: translateX(5px);
-}
-
-/* ACTIVE STATE (Lit Up) */
-#side-nav a.active {
-  color: var(--cyber-cyan);
-  text-shadow: 0 0 10px var(--cyber-cyan);
-  transform: scale(1.1) translateX(5px);
-}
-
-/* Mobile: Hide it on phones */
-@media (max-width: 768px) {
-  #side-nav {
-    display: none;
+  100% {
+    clip: rect(70px, 9999px, 100px, 0);
   }
 }
 
-/* --- CUSTOM SCROLLBAR --- */
-/* Width */
-::-webkit-scrollbar {
-  width: 8px;
+@keyframes glitch-anim-2 {
+  0% {
+    clip: rect(10px, 9999px, 90px, 0);
+  }
+
+  100% {
+    clip: rect(90px, 9999px, 10px, 0);
+  }
 }
 
-/* Track (Background) */
-::-webkit-scrollbar-track {
-  background: #050505;
-}
+@keyframes scanner {
+  0% {
+    background-position: 0% -100%;
+  }
 
-/* Handle (The moving part) */
-::-webkit-scrollbar-thumb {
-  background: var(--cyber-cyan);
-  border-radius: 4px;
-  box-shadow: 0 0 10px var(--cyber-cyan);
-  /* Glowing effect */
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #fff;
+  100% {
+    background-position: 0% 200%;
+  }
 }
 
 @keyframes jitter {
@@ -808,17 +749,111 @@ input[type="color"] {
   }
 }
 
-/* --- CUSTOM TEXT SELECTION --- */
-::selection {
-  background: var(--cyber-magenta);
-  /* Background becomes pink */
-  color: #fff;
-  /* Text becomes white */
-  text-shadow: 0 0 5px #fff;
+/* Glitch Effect Classes */
+.glitch {
+  position: relative;
+  color: var(--cyber-cyan);
 }
 
-/* Firefox specific */
-::-moz-selection {
-  background: var(--cyber-magenta);
-  color: #fff;
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -1px 0 #ff00f6;
+  clip: rect(24px, 550px, 90px, 0);
+  animation: glitch-anim-1 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -1px 0 #00fff8;
+  clip: rect(85px, 550px, 140px, 0);
+  animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+}
+
+/* =========================================
+   11. PRODUCTION PIPELINE TRACKER
+   ========================================= */
+
+.pipeline-tracker {
+  width: 100%;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+  padding-top: 1rem;
+  font-family: 'Courier New', monospace;
+  /* Tech font */
+}
+
+.status-header {
+  font-size: 0.8rem;
+  margin-bottom: 0.8rem;
+  color: #ccc;
+  font-weight: bold;
+}
+
+.blink-text {
+  color: var(--cyber-cyan);
+  /* RED */
+  animation: blink 1s step-end infinite;
+}
+
+.track-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  font-size: 0.75rem;
+}
+
+.track-row .label {
+  width: 35%;
+  color: var(--text-main);
+  opacity: 0.8;
+}
+
+.bar-track {
+  width: 60%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--cyber-cyan);
+  /* RED */
+  box-shadow: 0 0 5px var(--cyber-cyan);
+}
+
+/* The "Active Processing" Animation */
+.bar-fill.processing {
+  background-image: repeating-linear-gradient(45deg,
+      var(--cyber-cyan),
+      var(--cyber-cyan) 10px,
+      rgba(255, 255, 255, 0.5) 10px,
+      rgba(255, 255, 255, 0.5) 20px);
+  background-size: 28px 28px;
+  animation: stripemove 1s linear infinite;
+}
+
+@keyframes stripemove {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 28px 0;
+  }
 }

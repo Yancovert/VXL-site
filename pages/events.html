@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Transmission Log | Convergent Order Interface</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmission Log | VXL_OS</title>
 
     <script>
         const savedTheme = JSON.parse(localStorage.getItem('vxl_theme_config'));
@@ -16,68 +17,240 @@
     </script>
 
     <link rel="stylesheet" href="../styles.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="../main.js" defer></script>
+
+    <style>
+        /* PAGE SPECIFIC STYLES */
+        body {
+            background: linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+        }
+
+        .header-terminal {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
+        }
+
+        .countdown-box {
+            font-family: 'Courier New', monospace;
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--cyber-cyan);
+            text-shadow: 0 0 10px var(--cyber-cyan);
+            margin-top: 1rem;
+        }
+
+        /* TIMELINE LAYOUT */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        /* The Vertical Data Line */
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--cyber-cyan) 0%, rgba(255, 255, 255, 0.1) 100%);
+            box-shadow: 0 0 8px var(--cyber-cyan);
+        }
+
+        .event-node {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            /* Animated in by JS */
+            transform: translateX(20px);
+            transition: all 0.5s ease;
+        }
+
+        .event-node.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* The Dot on the line */
+        .event-node::before {
+            content: '';
+            position: absolute;
+            left: -2.35rem;
+            /* Adjust based on padding */
+            top: 1.5rem;
+            width: 12px;
+            height: 12px;
+            background: #000;
+            border: 2px solid var(--cyber-cyan);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        .event-card {
+            background: linear-gradient(145deg, var(--netherite-panel), #0a0a0a);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .event-card:hover {
+            border-color: var(--hover-glow);
+            box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.05);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            font-family: 'Courier New';
+            border-bottom-left-radius: 6px;
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-badge.incoming {
+            color: var(--cyber-cyan);
+        }
+
+        .status-badge.locked {
+            color: #555;
+        }
+
+        .date-display {
+            font-family: 'Courier New', monospace;
+            color: var(--cyber-magenta);
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
 </head>
 
-<body style="background: #050505; padding-top: 80px;">
+<body>
 
     <nav style="position:fixed; top:20px; left:20px; z-index:100;">
-        <a href="../index.html" class="resource-item" style="padding: 0.5rem 1rem;">
+        <a href="../index.html" class="resource-item" style="padding: 0.5rem 1rem; width: auto;">
             <i class="fa-solid fa-arrow-left"></i> RETURN_SIGNAL
         </a>
     </nav>
 
-    <section id="events" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
-        <h2 class="section-title">UPCOMING TRANSMISSIONS</h2>
+    <header class="header-terminal">
+        <h1 class="section-title" style="margin-bottom: 0.5rem;">TRANSMISSION LOG</h1>
+        <p style="color: #888; font-family: 'Courier New';">NEXT_EVENT_SYNC_TIMER:</p>
+        <div class="countdown-box" id="timer">00:00:00:00</div>
+    </header>
 
-        <div class="event-card" style="margin-bottom: 2rem;">
-            <div class="date-badge">MAR 15, 2026</div>
-            <div class="resource-item" style="flex-direction: column; align-items: flex-start;">
-                <h3 style="color: var(--cyber-cyan); font-size: 1.5rem;">The Voxel Summit</h3>
-                <p style="color: #aaa; margin-top: 0.5rem;">
-                    Annual gathering of the high-poly council. Discussion topics: Render pipelines and the future of
-                    cubic storytelling.
+    <section class="timeline-container">
+
+        <div class="event-node">
+            <div class="event-card">
+                <div class="status-badge incoming">/// SIGNAL_INCOMING</div>
+                <div class="date-display">
+                    <i class="fa-regular fa-clock"></i> MAR 15, 2026
+                </div>
+                <h3 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 0.5rem;">The Voxel Summit</h3>
+                <p style="color: #aaa; margin-bottom: 1rem; line-height: 1.5;">
+                    Annual gathering of the high-poly council. Discussion topics: Render pipelines, cubic storytelling,
+                    and the Redstone logic update.
                 </p>
-                <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--cyber-magenta);">
-                    <i class="fa-solid fa-location-dot"></i> HYPER_REGION_1 // DISCORD STAGE
+                <div
+                    style="font-size: 0.8rem; color: var(--cyber-cyan); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;">
+                    <i class="fa-solid fa-location-dot"></i> COORDINATES: DISCORD_STAGE // HYPER_REGION_1
                 </div>
             </div>
         </div>
 
-        <div class="event-card">
-            <div class="date-badge">APR 02, 2026</div>
-            <div class="resource-item" style="flex-direction: column; align-items: flex-start;">
-                <h3 style="color: var(--cyber-cyan); font-size: 1.5rem;">Project: DOGMA - Public Beta</h3>
-                <p style="color: #aaa; margin-top: 0.5rem;">
-                    First public access to the Dogma server. Whitelist applications open at 00:00 EST.
+        <div class="event-node">
+            <div class="event-card">
+                <div class="status-badge incoming">/// PENDING_AUTH</div>
+                <div class="date-display">
+                    <i class="fa-regular fa-calendar"></i> APR 02, 2026
+                </div>
+                <h3 style="color: var(--text-main); font-size: 1.5rem; margin-bottom: 0.5rem;">Project: DOGMA - Public
+                    Beta</h3>
+                <p style="color: #aaa; margin-bottom: 1rem;">
+                    First public access to the Dogma server architecture. Whitelist applications open at 00:00 EST.
+                    <br><i style="font-size:0.8rem; color:#666;">*Requires VXL Client v4.2</i>
                 </p>
-                <div style="margin-top: 1rem; font-size: 0.8rem; color: var(--cyber-magenta);">
+                <div
+                    style="font-size: 0.8rem; color: var(--cyber-cyan); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 0.5rem;">
                     <i class="fa-solid fa-server"></i> SERVER: PLAY.VXL.NET
                 </div>
             </div>
         </div>
 
+        <div class="event-node">
+            <div class="event-card" style="opacity: 0.6; filter: grayscale(1);">
+                <div class="status-badge locked">/// ENCRYPTED</div>
+                <div class="date-display">
+                    <i class="fa-solid fa-lock"></i> ??? ??, 2026
+                </div>
+                <h3 style="color: #666; font-size: 1.5rem; margin-bottom: 0.5rem;">[REDACTED]</h3>
+                <p style="color: #444; margin-bottom: 1rem;">
+                    Data stream corrupted. Key required to decrypt future roadmap.
+                </p>
+            </div>
+        </div>
+
     </section>
 
-    <style>
-        .date-badge {
-            display: inline-block;
-            background: var(--cyber-magenta);
-            color: #000;
-            font-weight: bold;
-            padding: 0.2rem 0.8rem;
-            margin-bottom: -10px;
-            margin-left: 1rem;
-            position: relative;
-            z-index: 2;
-            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0% 100%);
-            font-family: 'Courier New', monospace;
-        }
-    </style>
+    <footer style="margin-top: 4rem;">
+        ©2026 VOXEL COMMUNICATIONS ARRAY.
+    </footer>
 
+    <script>
+        // 1. ANIMATE ITEMS ON LOAD
+        document.addEventListener("DOMContentLoaded", () => {
+            const nodes = document.querySelectorAll('.event-node');
+            nodes.forEach((node, index) => {
+                setTimeout(() => {
+                    node.classList.add('visible');
+                }, index * 200); // Stagger effect
+            });
+
+            startCountdown();
+        });
+
+        // 2. COUNTDOWN LOGIC (Target: March 15, 2026)
+        function startCountdown() {
+            const targetDate = new Date("March 15, 2026 00:00:00").getTime();
+
+            setInterval(() => {
+                const now = new Date().getTime();
+                const distance = targetDate - now;
+
+                if (distance < 0) {
+                    document.getElementById("timer").innerHTML = "EVENT_IN_PROGRESS";
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML =
+                    `${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+            }, 1000);
+        }
+    </script>
 </body>
 
 </html>
