@@ -204,6 +204,11 @@ function initAudio() {
 function initGallery() {
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => {
+      
+      // NEW: If this item is a video, STOP here. 
+      // This prevents the Image Overlay from opening.
+      if (item.hasAttribute('data-video')) return; 
+
       const img = item.querySelector('img');
       if(img) openOverlay(img.src, item.dataset.title, item.dataset.desc);
     });
