@@ -6,94 +6,214 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VXL // SUPPLY DEPOT</title>
 
+    <script>
+        const savedTheme = JSON.parse(localStorage.getItem('vxl_theme_config'));
+        if (savedTheme) {
+            const root = document.documentElement;
+            Object.keys(savedTheme).forEach(key => {
+                root.style.setProperty(key, savedTheme[key]);
+            });
+        }
+    </script>
+
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
     <script src="../main.js" defer></script>
+
+    <style>
+        /* PAGE SPECIFIC: Video Overlay */
+        #video-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            /* Hidden by default */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #video-overlay video {
+            width: 80%;
+            max-width: 1000px;
+            border: 1px solid var(--cyber-cyan);
+            box-shadow: 0 0 30px rgba(0, 255, 248, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        .close-btn:hover {
+            color: var(--cyber-cyan);
+        }
+
+        /* Play Button Overlay on Card */
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            color: #fff;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-shadow: 0 0 10px #000;
+            z-index: 5;
+        }
+
+        .gallery-item:hover .play-overlay {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        /* FILTER BUTTON STYLES */
+        .filter-btn {
+            margin: 0 0.5rem;
+            background: transparent;
+            border: 1px solid transparent;
+            color: #666;
+            cursor: pointer;
+            font-family: 'Pixelify Sans';
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: var(--cyber-cyan);
+            text-shadow: 0 0 5px var(--cyber-cyan);
+            opacity: 1 !important;
+        }
+
+        /* Animation for filtering */
+        .gallery-item {
+            transition: all 0.5s ease;
+        }
+
+        .gallery-item.hide {
+            display: none;
+        }
+
+        .gallery-item.show {
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 
 <body>
+
+    <div id="video-overlay">
+        <button class="close-btn" onclick="closeVideo()">×</button>
+        <video id="store-video" controls loop>
+            <source src="" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h3 id="video-title" style="color: var(--cyber-cyan); margin-top: 1rem; font-family: 'Pixelify Sans';"></h3>
+    </div>
 
     <nav style="padding: 2rem; display: flex; justify-content: space-between; align-items: center;">
         <a href="../index.html" class="resource-item" style="display:inline-block; width:auto; padding: 0.5rem 1rem;">
             &lt; RETURN TO OS
         </a>
+        <div style="color: var(--cyber-cyan);">CREDITS: <span id="user-credits">0</span> VXL</div>
     </nav>
 
     <section style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
         <h1 class="section-title">RIGS & ASSETS</h1>
 
-        <div style="text-align: center; margin-bottom: 3rem;">
-            <button style="margin: 0 0.5rem;">ALL</button>
-            <button style="margin: 0 0.5rem; opacity: 0.6;">CHARACTER RIGS</button>
-            <button style="margin: 0 0.5rem; opacity: 0.6;">ENVIRONMENTS</button>
-            <button style="margin: 0 0.5rem; opacity: 0.6;">PROPS</button>
+        <div id="filter-container" style="text-align: center; margin-bottom: 3rem;">
+            <button class="filter-btn active" onclick="filterSelection('all')">ALL</button>
+            <button class="filter-btn" onclick="filterSelection('rig')">CHARACTER RIGS</button>
+            <button class="filter-btn" onclick="filterSelection('env')">ENVIRONMENTS</button>
         </div>
 
         <div class="gallery">
 
-            <div class="gallery-item" style="height: auto; cursor: default;">
+            <div class="gallery-item rig" onclick="playPreview(this)" data-video="../assets/videos/runtestnewmsa.mp4"
+                data-title="Generic Humanoid Rig v2">
+
                 <div
-                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                    <i class="fa-solid fa-cube" style="font-size: 3rem; color: #333;"></i>
+                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
+                    <img src="../assets/images/v12.png" alt="Rig V1 Preview"
+                        style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
+                    <i class="fa-solid fa-play play-overlay"></i>
                 </div>
 
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Generic Humanoid Rig v2</h3>
                     <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">
-                        Standard bipedal rig compatible with Blender 4.0. IK/FK switch included.
+                        Standard bipedal rig. IK/FK switch included.
                     </p>
-
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <span style="color: var(--cyber-cyan); font-weight: bold;">FREE</span>
-                        <a href="#" class="resource-item" style="width: auto; padding: 0.5rem 1rem;">
-                            <i class="fa-solid fa-download"></i> GET
-                        </a>
+                        <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item" style="height: auto; cursor: default;">
+            <div class="gallery-item env" onclick="playPreview(this)"
+                data-video="../assets/videos/product_placeholder.mp4" data-title="Cyber City Pack">
+
                 <div
-                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
                     <i class="fa-solid fa-city" style="font-size: 3rem; color: #333;"></i>
+                    <i class="fa-solid fa-play play-overlay"></i>
                 </div>
 
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Cyber City Pack</h3>
                     <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">
-                        Low-poly modular building kit. 50+ Unique assets.
+                        Low-poly modular building kit.
                     </p>
-
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--cyber-cyan); font-weight: bold;">$10.00</span>
-                        <a href="#" class="resource-item" style="width: auto; padding: 0.5rem 1rem;">
-                            <i class="fa-solid fa-cart-plus"></i> BUY
-                        </a>
+                        <span style="color: var(--cyber-cyan); font-weight: bold;">$15.00</span>
+                        <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
                     </div>
                 </div>
             </div>
 
-            <div class="gallery-item" style="height: auto; cursor: default;">
+            <div class="gallery-item rig" onclick="playPreview(this)"
+                data-video="../assets/videos/product_placeholder.mp4" data-title="Mecha-01">
+
                 <div
-                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
                     <i class="fa-solid fa-robot" style="font-size: 3rem; color: #333;"></i>
+                    <i class="fa-solid fa-play play-overlay"></i>
                 </div>
 
                 <div style="padding: 1.5rem;">
                     <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Mecha-01</h3>
                     <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">
-                        Fully textured combat mech. 4k Textures.
+                        Fully textured combat mech.
                     </p>
-
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--cyber-cyan); font-weight: bold;">$5.00</span>
-                        <a href="#" class="resource-item" style="width: auto; padding: 0.5rem 1rem;">
-                            <i class="fa-solid fa-cart-plus"></i> BUY
-                        </a>
+                        <span style="color: var(--cyber-cyan); font-weight: bold;">$25.00</span>
+                        <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
                     </div>
                 </div>
             </div>
@@ -104,6 +224,86 @@
     <footer>
         ©2026 VOXEL SUPPLY DEPOT.
     </footer>
+
+    <script>
+        // 1. VIDEO PLAYER LOGIC
+        const overlay = document.getElementById('video-overlay');
+        const videoPlayer = document.getElementById('store-video');
+        const videoTitle = document.getElementById('video-title');
+
+        function playPreview(element) {
+            const videoSrc = element.getAttribute('data-video');
+            const title = element.getAttribute('data-title');
+
+            if (videoSrc) {
+                videoPlayer.src = videoSrc;
+                videoTitle.innerText = "PREVIEW: " + title;
+                overlay.style.display = 'flex';
+                videoPlayer.play();
+            }
+        }
+
+        function closeVideo() {
+            overlay.style.display = 'none';
+            videoPlayer.pause();
+            videoPlayer.src = "";
+        }
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) closeVideo();
+        });
+
+        // 2. FILTER LOGIC (Fixing the Buttons)
+        filterSelection("all"); // Execute on load
+
+        function filterSelection(c) {
+            var x, i;
+            x = document.getElementsByClassName("gallery-item");
+            if (c == "all") c = "";
+
+            // Loop through all items
+            for (i = 0; i < x.length; i++) {
+                removeClass(x[i], "show");
+                if (x[i].className.indexOf(c) > -1) {
+                    addClass(x[i], "show");
+                    x[i].style.display = "block"; // Make visible
+                } else {
+                    x[i].style.display = "none"; // Hide
+                }
+            }
+
+            // Update Button Active State
+            var btnContainer = document.getElementById("filter-container");
+            var btns = btnContainer.getElementsByClassName("filter-btn");
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].classList.remove("active");
+                if (btns[i].getAttribute("onclick").includes(c || 'all')) {
+                    btns[i].classList.add("active");
+                }
+            }
+        }
+
+        // Helper functions for classes
+        function addClass(element, name) {
+            var arr1 = element.className.split(" ");
+            var arr2 = name.split(" ");
+            for (var i = 0; i < arr2.length; i++) {
+                if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; }
+            }
+        }
+
+        function removeClass(element, name) {
+            var arr1 = element.className.split(" ");
+            var arr2 = name.split(" ");
+            for (var i = 0; i < arr2.length; i++) {
+                while (arr1.indexOf(arr2[i]) > -1) {
+                    arr1.splice(arr1.indexOf(arr2[i]), 1);
+                }
+            }
+            element.className = arr1.join(" ");
+        }
+    </script>
+
 </body>
 
 </html>
