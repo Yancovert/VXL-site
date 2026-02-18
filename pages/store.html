@@ -6,16 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VXL // SUPPLY DEPOT</title>
 
-    <script>
-        const savedTheme = JSON.parse(localStorage.getItem('vxl_theme_config'));
-        if (savedTheme) {
-            const root = document.documentElement;
-            Object.keys(savedTheme).forEach(key => {
-                root.style.setProperty(key, savedTheme[key]);
-            });
-        }
-    </script>
-
+    <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -163,66 +154,57 @@
             <button class="filter-btn" onclick="filterSelection('env')">ENVIRONMENTS</button>
         </div>
 
-        <div class="gallery">
-            <div class="gallery-item rig" onclick="playPreview(this)" data-video="../assets/videos/runtestnewmsa.mp4"
-                data-title="Generic Humanoid Rig v2">
-                <div
-                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
-                    <img src="../assets/images/v12.png" alt="Rig V1 Preview"
-                        style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">
-                    <i class="fa-solid fa-play play-overlay"></i>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Generic Humanoid Rig v2</h3>
-                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Standard bipedal rig. IK/FK switch
-                        included.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--cyber-cyan); font-weight: bold;">FREE</span>
-                        <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
-                    </div>
-                </div>
-            </div>
+        <div class="gallery" id="product-gallery"></div>
 
-            <div class="gallery-item env" onclick="playPreview(this)"
-                data-video="../assets/videos/product_placeholder.mp4" data-title="Cyber City Pack">
-                <div
-                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
-                    <i class="fa-solid fa-city" style="font-size: 3rem; color: #333;"></i>
-                    <i class="fa-solid fa-play play-overlay"></i>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Cyber City Pack</h3>
-                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Low-poly modular building kit.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--cyber-cyan); font-weight: bold;">$15.00</span>
-                        <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="gallery-item rig" onclick="playPreview(this)"
-                data-video="../assets/videos/product_placeholder.mp4" data-title="Mecha-01">
-                <div
-                    style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative;">
-                    <i class="fa-solid fa-robot" style="font-size: 3rem; color: #333;"></i>
-                    <i class="fa-solid fa-play play-overlay"></i>
-                </div>
-                <div style="padding: 1.5rem;">
-                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">Mecha-01</h3>
-                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">Fully textured combat mech.</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--cyber-cyan); font-weight: bold;">$25.00</span>
-                        <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
     <footer>©2026 VOXEL SUPPLY DEPOT.</footer>
 
     <script>
-        // VIDEO & FILTER LOGIC (UNCHANGED)
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('products.json')
+                .then(response => response.json())
+                .then(products => {
+                    const gallery = document.getElementById('product-gallery');
+
+                    products.forEach(product => {
+                        // Determine if we show an IMG or an ICON based on JSON
+                        let thumbnailHTML = '';
+                        if (product.thumbnail_type === 'image') {
+                            thumbnailHTML = `<img src="${product.thumbnail_src}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">`;
+                        } else {
+                            thumbnailHTML = `<i class="${product.thumbnail_src}" style="font-size: 3rem; color: #333;"></i>`;
+                        }
+
+                        // Build the HTML Card
+                        const card = document.createElement('div');
+                        card.className = `gallery-item ${product.type} show`; // Default to show
+                        card.setAttribute('onclick', 'playPreview(this)');
+                        card.setAttribute('data-video', product.video);
+                        card.setAttribute('data-title', product.name);
+
+                        card.innerHTML = `
+                            <div style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
+                                ${thumbnailHTML}
+                                <i class="fa-solid fa-play play-overlay"></i>
+                            </div>
+                            <div style="padding: 1.5rem;">
+                                <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">${product.name}</h3>
+                                <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">${product.description}</p>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span style="color: var(--cyber-cyan); font-weight: bold;">${product.price}</span>
+                                    <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
+                                </div>
+                            </div>
+                        `;
+
+                        gallery.appendChild(card);
+                    });
+                })
+                .catch(error => console.error('Error loading products:', error));
+        });
+
+        // VIDEO & FILTER LOGIC
         const overlay = document.getElementById('video-overlay');
         const videoPlayer = document.getElementById('store-video');
         const videoTitle = document.getElementById('video-title');
@@ -244,20 +226,23 @@
         }
         overlay.addEventListener('click', (e) => { if (e.target === overlay) closeVideo(); });
 
-        filterSelection("all");
         function filterSelection(c) {
             var x, i;
             x = document.getElementsByClassName("gallery-item");
             if (c == "all") c = "";
             for (i = 0; i < x.length; i++) {
-                removeClass(x[i], "show");
+                // Ensure we handle display property correctly for filtered items
                 if (x[i].className.indexOf(c) > -1) {
-                    addClass(x[i], "show");
                     x[i].style.display = "block";
+                    // Add fade in animation class if needed, or simply let it appear
+                    x[i].style.opacity = "1";
+                    x[i].style.transform = "scale(1)";
                 } else {
                     x[i].style.display = "none";
                 }
             }
+
+            // Update Buttons
             var btnContainer = document.getElementById("filter-container");
             var btns = btnContainer.getElementsByClassName("filter-btn");
             for (var i = 0; i < btns.length; i++) {
@@ -266,23 +251,6 @@
                     btns[i].classList.add("active");
                 }
             }
-        }
-        function addClass(element, name) {
-            var arr1 = element.className.split(" ");
-            var arr2 = name.split(" ");
-            for (var i = 0; i < arr2.length; i++) {
-                if (arr1.indexOf(arr2[i]) == -1) { element.className += " " + arr2[i]; }
-            }
-        }
-        function removeClass(element, name) {
-            var arr1 = element.className.split(" ");
-            var arr2 = name.split(" ");
-            for (var i = 0; i < arr2.length; i++) {
-                while (arr1.indexOf(arr2[i]) > -1) {
-                    arr1.splice(arr1.indexOf(arr2[i]), 1);
-                }
-            }
-            element.className = arr1.join(" ");
         }
     </script>
 
@@ -303,7 +271,7 @@
 
         // 1. SETUP SCENE
         const scene = new THREE.Scene();
-        scene.fog = new THREE.FogExp2(0x050505, 0.04); // Heavier fog to blend distance
+        scene.fog = new THREE.FogExp2(0x050505, 0.04);
 
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         camera.position.z = 5;
@@ -315,7 +283,6 @@
 
         // 2. POST-PROCESSING (BLOOM)
         const renderScene = new RenderPass(scene, camera);
-        // Strength, Radius, Threshold
         const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
         bloomPass.strength = 1.0;
         bloomPass.radius = 0.8;
@@ -327,17 +294,15 @@
 
         // 3. CREATE VOXELS
         const voxels = [];
-        const geometry = new THREE.BoxGeometry(1, 1, 1); // Standard cube unit
-        const colors = [0x00ffff, 0xff00ff, 0x0055ff, 0x444444]; // Cyan, Magenta, Deep Blue, Grey
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const colors = [0x00ffff, 0xff00ff, 0x0055ff, 0x444444];
 
         function createVoxel() {
-            // Pick a random color from palette
             const color = colors[Math.floor(Math.random() * colors.length)];
-
             const material = new THREE.MeshStandardMaterial({
                 color: 0x111111,
                 emissive: color,
-                emissiveIntensity: Math.random() * 1.5 + 0.5, // Random brightness
+                emissiveIntensity: Math.random() * 1.5 + 0.5,
                 roughness: 0.1,
                 metalness: 0.8,
                 transparent: true,
@@ -345,17 +310,13 @@
             });
 
             const mesh = new THREE.Mesh(geometry, material);
-
-            // Random Scale (Variation)
-            const s = Math.random() * 0.4 + 0.1; // Size between 0.1 and 0.5
+            const s = Math.random() * 0.4 + 0.1;
             mesh.scale.set(s, s, s);
 
-            // Random Position (Wide spread)
-            mesh.position.x = (Math.random() - 0.5) * 25; // Wide horizontally
-            mesh.position.y = (Math.random() - 0.5) * 15; // Tall vertically
-            mesh.position.z = -2 - Math.random() * 8;     // Depth: -2 to -10
+            mesh.position.x = (Math.random() - 0.5) * 25;
+            mesh.position.y = (Math.random() - 0.5) * 15;
+            mesh.position.z = -2 - Math.random() * 8;
 
-            // Random Rotation speed storage
             mesh.userData = {
                 rotX: (Math.random() - 0.5) * 0.02,
                 rotY: (Math.random() - 0.5) * 0.02,
@@ -368,7 +329,6 @@
             voxels.push(mesh);
         }
 
-        // Generate 50 floating voxels
         for (let i = 0; i < 50; i++) {
             createVoxel();
         }
@@ -389,15 +349,9 @@
             const time = clock.getElapsedTime();
 
             voxels.forEach(mesh => {
-                // Rotate
                 mesh.rotation.x += mesh.userData.rotX;
                 mesh.rotation.y += mesh.userData.rotY;
-
-                // Float up and down gently
                 mesh.position.y = mesh.userData.baseY + Math.sin(time * mesh.userData.floatSpeed + mesh.userData.floatOffset) * 0.5;
-
-                // Subtle pulse of intensity (optional aesthetic)
-                // mesh.material.emissiveIntensity = 1 + Math.sin(time * 2 + mesh.userData.floatOffset) * 0.5;
             });
 
             composer.render();
@@ -405,7 +359,6 @@
 
         animate();
 
-        // Handle Resize
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();

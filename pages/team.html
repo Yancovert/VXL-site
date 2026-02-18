@@ -6,88 +6,281 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VXL // TEAM ROSTER</title>
 
+    <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="../styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-    <script src="../main.js" defer></script>
+    <style>
+        /* 3D Background Container */
+        #canvas-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-color: #050505;
+        }
+
+        /* Team Grid Layout */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Member Card Styling */
+        .member-card {
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid #333;
+            backdrop-filter: blur(5px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            overflow: hidden;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--cyber-cyan);
+        }
+
+        .member-img-container {
+            width: 100%;
+            height: 300px;
+            background: #111;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid #333;
+        }
+
+        .member-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+            opacity: 0.9;
+        }
+
+        .member-card:hover .member-img-container img {
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        .member-info {
+            padding: 1.5rem;
+        }
+
+        .member-role {
+            color: var(--cyber-cyan);
+            font-family: 'Pixelify Sans';
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .member-bio {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-top: 1rem;
+        }
+
+        .social-links {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #666;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
 
-    <nav style="padding: 2rem;">
+    <div id="canvas-container"></div>
+
+    <nav style="padding: 2rem; display: flex; justify-content: space-between; align-items: center;">
         <a href="../index.html" class="resource-item" style="display:inline-block; width:auto; padding: 0.5rem 1rem;">
             &lt; RETURN TO OS
         </a>
     </nav>
 
-    <section style="max-width: 1000px; margin: 0 auto; padding: 0 2rem;">
-
+    <section style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
         <h1 class="section-title">ACTIVE PERSONNEL</h1>
 
-        <div class="team-category" style="margin-bottom: 4rem;">
-            <h2
-                style="color: var(--cyber-cyan); border-bottom: 1px solid #333; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">
-                // PRODUCTION_CORE
-            </h2>
-
-            <div class="resource-grid">
-                <div class="resource-item" style="flex-direction: column; text-align: center; padding: 2rem;">
-                    <div
-                        style="width: 80px; height: 80px; background: #222; border-radius: 50%; margin-bottom: 1rem; border: 1px solid var(--cyber-cyan);">
-                    </div>
-                    <h3 style="color: var(--text-main);">Placeholder Name</h3>
-                    <p style="color: #666; font-size: 0.9rem;">DIRECTOR / LEAD</p>
-                </div>
-
-                <div class="resource-item" style="flex-direction: column; text-align: center; padding: 2rem;">
-                    <div
-                        style="width: 80px; height: 80px; background: #222; border-radius: 50%; margin-bottom: 1rem; border: 1px solid var(--cyber-cyan);">
-                    </div>
-                    <h3 style="color: var(--text-main);">Placeholder Name</h3>
-                    <p style="color: #666; font-size: 0.9rem;">EXECUTIVE PRODUCER</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="team-category">
-            <h2
-                style="color: var(--cyber-cyan); border-bottom: 1px solid #333; padding-bottom: 0.5rem; margin-bottom: 1.5rem;">
-                // ANIMATION_UNIT
-            </h2>
-
-            <div style="display: flex; flex-direction: column; gap: 1rem;">
-
-                <div class="resource-item" style="justify-content: space-between;">
-                    <span>Sam _TA</span>
-                    <span style="color: #666; font-size: 0.8rem;">[ SR. ANIMATOR ]</span>
-                </div>
-
-                <div class="resource-item" style="justify-content: space-between;">
-                    <span>Placeholder Staff</span>
-                    <span style="color: #666; font-size: 0.8rem;">[ MODELING ]</span>
-                </div>
-
-                <div class="resource-item" style="justify-content: space-between;">
-                    <span>Placeholder Staff</span>
-                    <span style="color: #666; font-size: 0.8rem;">[ TEXTURING ]</span>
-                </div>
-
-                <div class="resource-item" style="justify-content: space-between;">
-                    <span>Placeholder Staff</span>
-                    <span style="color: #666; font-size: 0.8rem;">[ RIGGING ]</span>
-                </div>
-
-            </div>
-        </div>
-
+        <div class="team-grid" id="team-container"></div>
     </section>
 
-    <footer>
-        ©2026 VOXEL ANIMATION PVT.
-    </footer>
+    <footer>©2026 VOXEL SUPPLY DEPOT.</footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('team.json')
+                .then(response => response.json())
+                .then(members => {
+                    const container = document.getElementById('team-container');
+
+                    members.forEach(member => {
+                        // Generate Social Links HTML dynamically
+                        let socialHTML = '';
+                        if (member.socials) {
+                            for (const [platform, link] of Object.entries(member.socials)) {
+                                let iconClass = 'fa-solid fa-link'; // default
+                                if (platform === 'github') iconClass = 'fa-brands fa-github';
+                                if (platform === 'twitter') iconClass = 'fa-brands fa-x-twitter';
+                                if (platform === 'artstation') iconClass = 'fa-brands fa-artstation';
+                                if (platform === 'dribbble') iconClass = 'fa-brands fa-dribbble';
+
+                                socialHTML += `<a href="${link}" target="_blank"><i class="${iconClass}"></i></a>`;
+                            }
+                        }
+
+                        const card = document.createElement('div');
+                        card.className = 'member-card';
+
+                        card.innerHTML = `
+                            <div class="member-img-container">
+                                <img src="${member.image}" alt="${member.name}">
+                            </div>
+                            <div class="member-info">
+                                <span class="member-role">// ${member.role}</span>
+                                <h3 style="color: #fff; margin: 0; font-size: 1.5rem;">${member.name}</h3>
+                                <p class="member-bio">${member.bio}</p>
+                                <div class="social-links">
+                                    ${socialHTML}
+                                </div>
+                            </div>
+                        `;
+
+                        container.appendChild(card);
+                    });
+                })
+                .catch(error => console.error('Error loading team:', error));
+        });
+    </script>
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+        import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+        import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+        // 1. SETUP SCENE
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x050505, 0.04);
+
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 5;
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.toneMapping = THREE.ReinhardToneMapping;
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // 2. POST-PROCESSING (BLOOM)
+        const renderScene = new RenderPass(scene, camera);
+        const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+        bloomPass.strength = 1.0;
+        bloomPass.radius = 0.8;
+        bloomPass.threshold = 0.1;
+
+        const composer = new EffectComposer(renderer);
+        composer.addPass(renderScene);
+        composer.addPass(bloomPass);
+
+        // 3. CREATE VOXELS
+        const voxels = [];
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
+        const colors = [0x00ffff, 0xff00ff, 0x0055ff, 0x444444];
+
+        function createVoxel() {
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x111111,
+                emissive: color,
+                emissiveIntensity: Math.random() * 1.5 + 0.5,
+                roughness: 0.1,
+                metalness: 0.8,
+                transparent: true,
+                opacity: 0.8
+            });
+
+            const mesh = new THREE.Mesh(geometry, material);
+            const s = Math.random() * 0.4 + 0.1;
+            mesh.scale.set(s, s, s);
+
+            mesh.position.x = (Math.random() - 0.5) * 25;
+            mesh.position.y = (Math.random() - 0.5) * 15;
+            mesh.position.z = -2 - Math.random() * 8;
+
+            mesh.userData = {
+                rotX: (Math.random() - 0.5) * 0.02,
+                rotY: (Math.random() - 0.5) * 0.02,
+                baseY: mesh.position.y,
+                floatSpeed: Math.random() * 0.5 + 0.2,
+                floatOffset: Math.random() * Math.PI * 2
+            };
+
+            scene.add(mesh);
+            voxels.push(mesh);
+        }
+
+        for (let i = 0; i < 50; i++) {
+            createVoxel();
+        }
+
+        // 4. LIGHTING
+        const ambientLight = new THREE.AmbientLight(0x222222);
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xffffff, 1);
+        pointLight.position.set(0, 5, 5);
+        scene.add(pointLight);
+
+        // 5. ANIMATION LOOP
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const time = clock.getElapsedTime();
+
+            voxels.forEach(mesh => {
+                mesh.rotation.x += mesh.userData.rotX;
+                mesh.rotation.y += mesh.userData.rotY;
+                mesh.position.y = mesh.userData.baseY + Math.sin(time * mesh.userData.floatSpeed + mesh.userData.floatOffset) * 0.5;
+            });
+
+            composer.render();
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            composer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
 </body>
 
 </html>

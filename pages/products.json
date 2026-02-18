@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "name": "Generic Humanoid Rig v2",
+        "type": "rig",
+        "price": "FREE",
+        "description": "Standard bipedal rig. IK/FK switch included.",
+        "video": "../assets/videos/runtestnewmsa.mp4",
+        "thumbnail_type": "image",
+        "thumbnail_src": "../assets/images/v12.png"
+    },
+    {
+        "id": 2,
+        "name": "Cyber City",
+        "type": "env",
+        "price": "$15.00",
+        "description": "Low-poly modular building kit.",
+        "video": "../assets/videos/product_placeholder.mp4",
+        "thumbnail_type": "icon",
+        "thumbnail_src": "fa-solid fa-city"
+    },
+    {
+        "id": 3,
+        "name": "Mecha-01",
+        "type": "rig",
+        "price": "$25.00",
+        "description": "Fully textured combat mech.",
+        "video": "../assets/videos/product_placeholder.mp4",
+        "thumbnail_type": "icon",
+        "thumbnail_src": "fa-solid fa-robot"
+    }
+]

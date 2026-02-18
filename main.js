@@ -241,3 +241,58 @@ function openOverlay(src, title, desc) {
   el.style.display = 'flex';
 }
 
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('projects.json')
+        .then(response => response.json())
+        .then(projects => {
+            const container = document.getElementById('ongoing-gallery');
+            
+            projects.forEach(project => {
+                // Helper to determine if a bar needs the "processing" class (active glow)
+                // Logic: If it's started (>0) but not finished (<100), it's processing.
+                const isProcessing = (val) => (val > 0 && val < 100) ? 'processing' : '';
+
+                const card = document.createElement('figure');
+                card.className = 'gallery-item';
+                card.setAttribute('data-title', project.data_title);
+                card.setAttribute('data-desc', project.data_desc);
+
+                card.innerHTML = `
+                    <img src="${project.image}" alt="${project.display_title}">
+                    <figcaption>
+                        <h3>${project.display_title}</h3>
+
+                        <div class="pipeline-tracker">
+                            <div class="status-header">
+                                STATUS: <span class="blink-text">${project.status}</span>
+                            </div>
+
+                            <div class="track-row">
+                                <span class="label">MODELING</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill ${isProcessing(project.progress.modeling)}" style="width: ${project.progress.modeling}%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="track-row">
+                                <span class="label">ANIMATION</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill ${isProcessing(project.progress.animation)}" style="width: ${project.progress.animation}%;"></div>
+                                </div>
+                            </div>
+
+                            <div class="track-row">
+                                <span class="label">RENDERING</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill ${isProcessing(project.progress.rendering)}" style="width: ${project.progress.rendering}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </figcaption>
+                `;
+                
+                container.appendChild(card);
+            });
+        })
+        .catch(error => console.error('Error loading ongoing projects:', error));
+});

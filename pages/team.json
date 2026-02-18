@@ -1,0 +1,56 @@
+[
+    {
+    "id": 1,
+    "name": "Yan Covert",
+    "role": "Lead Developer",
+    "image": "../assets/images/profile_placeholder.png",
+    "bio": "Architect.",
+    "socials": {
+        "github": "#",
+        "twitter": "#"
+    }
+    },
+    {
+    "id": 2,
+    "name": "Sam_TA",
+    "role": "3D Generalist",
+    "image": "../assets/images/bot_avatar.png",
+    "bio": "Animator.",
+    "socials": {
+        "artstation": "#"
+    }
+    },
+    {
+    "id": 3,
+    "name": "LEB_xr",
+    "role": "Supervisor.",
+    "image": "../assets/images/ui_avatar.png",
+    "bio": "Animator.",
+    "socials": {
+        "dribbble": "#",
+        "twitter": "#"
+    }
+    },
+    {
+    "id": 1,
+    "name": "Chakimbo",
+    "role": "Server Host",
+    "image": "../assets/images/profile_placeholder.png",
+    "bio": "Architect.",
+    "socials": {
+        "github": "#",
+        "twitter": "#"
+    }
+    },
+    {
+    "id": 1,
+    "name": "DragonLazer",
+    "role": "VFX Guy",
+    "image": "../assets/images/profile_placeholder.png",
+    "bio": "Lazy ahh.",
+    "socials": {
+        "github": "#",
+        "twitter": "#"
+    }
+    }
+]

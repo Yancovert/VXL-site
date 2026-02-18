@@ -1,0 +1,54 @@
+[
+    {
+    "id": 1,
+    "data_title": "Interim Dogma",
+    "data_desc": "An illusory cyberspace.",
+    "display_title": "Interim Dogma",
+    "image": "assets/images/dogma.png",
+    "status": "IN_PROGRESS",
+    "progress": {
+    "modeling": 100,
+    "animation": 65,
+    "rendering": 0
+    }
+    },
+    {
+    "id": 2,
+    "data_title": "Cherry Grove",
+    "data_desc": "Familiar fields of eternal dreams...",
+    "display_title": "A heartfelt grove",
+    "image": "assets/images/banner.png",
+    "status": "IN_PROGRESS",
+    "progress": {
+    "modeling": 100,
+    "animation": 65,
+    "rendering": 0
+    }
+    },
+    {
+    "id": 3,
+    "data_title": "Interface",
+    "data_desc": "When survival calls...",
+    "display_title": "Meet the Interface",
+    "image": "assets/images/Epic pose.png",
+    "status": "IN_PROGRESS",
+    "progress": {
+    "modeling": 100,
+    "animation": 95,
+    "rendering": 0
+    }
+    },
+    {
+    "id": 4,
+    "data_title": "Convergent Order",
+    "data_desc": "Meet the maker.",
+    "display_title": "The Convergent Order",
+    "image": "assets/images/Convergent .png",
+    "status": "IN_PROGRESS",
+    "progress": {
+    "modeling": 100,
+    "animation": 100,
+    "rendering": 80
+    }
+    }
+]
