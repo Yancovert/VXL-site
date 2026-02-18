@@ -1,0 +1,26 @@
+[
+    {
+        "id": "sp_01",
+        "title": "Amorphous Passe",
+        "genre": "Sci-Fi / Abstract",
+        "pages": "Post Apocalyptic Fiction",
+        "logline": "A pursuit of familiarity.",
+        "pdf_path": "assets/screenplays/AMORPHOUS_PASSÉ.pdf"
+    },
+    {
+        "id": "sp_02",
+        "title": "Amorphous Progeny",
+        "genre": "Political Action Thriller",
+        "pages": "Unknown",
+        "logline": "The descendants of the first AI architects struggle to define their own humanity.",
+        "pdf_path": "assets/screenplays/progeny.pdf"
+    },
+    {
+        "id": "sp_03",
+        "title": "Amorphous Praxis",
+        "genre": "Dystopian Space Opera",
+        "pages": "Unknown",
+        "logline": "Reckoning.",
+        "pdf_path": "assets/screenplays/praxis.pdf"
+    }
+]
