@@ -7,17 +7,19 @@
         "description": "Standard bipedal rig. IK/FK switch included.",
         "video": "../assets/videos/runtestnewmsa.mp4",
         "thumbnail_type": "image",
-        "thumbnail_src": "../assets/images/v12.png"
+        "thumbnail_src": "../assets/images/v12.png",
+        "purchase_url": "https://ko-fi.com/samta/shop"
     },
     {
         "id": 2,
-        "name": "Cyber City",
+        "name": "Cyber City Pack",
         "type": "env",
         "price": "$15.00",
         "description": "Low-poly modular building kit.",
         "video": "../assets/videos/product_placeholder.mp4",
         "thumbnail_type": "icon",
-        "thumbnail_src": "fa-solid fa-city"
+        "thumbnail_src": "fa-solid fa-city",
+        "purchase_url": "https://gumroad.com/your-link-here"
     },
     {
         "id": 3,
@@ -27,6 +29,7 @@
         "description": "Fully textured combat mech.",
         "video": "../assets/videos/product_placeholder.mp4",
         "thumbnail_type": "icon",
-        "thumbnail_src": "fa-solid fa-robot"
+        "thumbnail_src": "fa-solid fa-robot",
+        "purchase_url": "https://gumroad.com/your-link-here"
     }
 ]

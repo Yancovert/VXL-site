@@ -24,6 +24,14 @@
             background-color: var(--bg-color);
         }
 
+        /* Added padding-bottom here to push the footer away */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 5rem 2rem;
+            /* Top | Right | Bottom (FIX) | Left */
+        }
+
         .script-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -123,6 +131,17 @@
             color: #000;
             border-color: var(--cyber-pink);
         }
+
+        /* Footer override to ensure it has space above it if needed */
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 10;
+        }
     </style>
 </head>
 
@@ -136,17 +155,16 @@
         </a>
     </nav>
 
-    <section style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+    <section>
         <h1 class="section-title">NARRATIVE DATABASE</h1>
 
         <div class="script-grid" id="script-container"></div>
     </section>
 
-    <footer>© VOXEL ANIMATION</footer>
+    <footer>©2026 VOXEL ANIMATION</footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // FIX 1: Fetch from ROOT directory (../screenplays.json)
             fetch('../screenplays.json')
                 .then(response => {
                     if (!response.ok) {
@@ -161,7 +179,7 @@
                         const card = document.createElement('div');
                         card.className = 'script-card';
 
-                        // FIX 2: Prepend ../ to the path so links work from inside a subfolder
+                        // Path Fix: Ensure links go up one level to root
                         const pdfUrl = '../' + script.pdf_path;
 
                         card.innerHTML = `
@@ -178,7 +196,6 @@
                             </div>
                             <div class="script-actions">
                                 <a href="${pdfUrl}" target="_blank" class="action-btn primary"><i class="fa-solid fa-eye"></i> READ</a>
-                                
                                 <a href="${pdfUrl}" download class="action-btn"><i class="fa-solid fa-download"></i> DOWNLOAD</a>
                             </div>
                         `;
@@ -188,7 +205,6 @@
                 })
                 .catch(error => {
                     console.error('Error loading screenplays:', error);
-                    // Helpful error message on screen
                     const container = document.getElementById('script-container');
                     container.innerHTML = `<p style="color:red;">ERROR: Could not load database. Check console.</p>`;
                 });

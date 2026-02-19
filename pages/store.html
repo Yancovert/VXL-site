@@ -168,7 +168,7 @@
                     const gallery = document.getElementById('product-gallery');
 
                     products.forEach(product => {
-                        // Determine if we show an IMG or an ICON based on JSON
+                        // Determine if we show an IMG or an ICON
                         let thumbnailHTML = '';
                         if (product.thumbnail_type === 'image') {
                             thumbnailHTML = `<img src="${product.thumbnail_src}" alt="${product.name}" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.8;">`;
@@ -178,25 +178,36 @@
 
                         // Build the HTML Card
                         const card = document.createElement('div');
-                        card.className = `gallery-item ${product.type} show`; // Default to show
+                        card.className = `gallery-item ${product.type} show`;
+
+                        // The Main Card Click still triggers the preview
                         card.setAttribute('onclick', 'playPreview(this)');
                         card.setAttribute('data-video', product.video);
                         card.setAttribute('data-title', product.name);
 
                         card.innerHTML = `
-                            <div style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
-                                ${thumbnailHTML}
-                                <i class="fa-solid fa-play play-overlay"></i>
-                            </div>
-                            <div style="padding: 1.5rem;">
-                                <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">${product.name}</h3>
-                                <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem;">${product.description}</p>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <span style="color: var(--cyber-cyan); font-weight: bold;">${product.price}</span>
-                                    <button class="resource-item" style="width: auto; padding: 0.5rem 1rem;">PREVIEW</button>
+                                <div style="height: 200px; background: #1a1a1a; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.1); position: relative; overflow: hidden;">
+                                    ${thumbnailHTML}
+                                    <i class="fa-solid fa-play play-overlay"></i>
                                 </div>
-                            </div>
-                        `;
+                                <div style="padding: 1.5rem; display: flex; flex-direction: column; height: calc(100% - 200px);">
+                                    <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">${product.name}</h3>
+                                    <p style="color: #888; font-size: 0.9rem; margin-bottom: 1.5rem; flex-grow: 1;">${product.description}</p>
+                                    
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                                        <span style="color: var(--cyber-cyan); font-weight: bold; font-size: 1.1rem;">${product.price}</span>
+                                        
+                                        <div style="display: flex; gap: 0.5rem;">
+                                            <button class="resource-item" onclick="playPreview(this.closest('.gallery-item'))" style="width: auto; padding: 0.5rem 0.8rem; font-size: 0.8rem;">PREVIEW</button>
+                                            
+                                            <a href="${product.purchase_url}" target="_blank" onclick="event.stopPropagation();" class="resource-item" 
+                                            style="width: auto; padding: 0.5rem 0.8rem; font-size: 0.8rem; text-decoration: none; border-color: var(--cyber-pink); color: var(--cyber-pink);">
+                                            PURCHASE
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            `;
 
                         gallery.appendChild(card);
                     });
@@ -204,7 +215,7 @@
                 .catch(error => console.error('Error loading products:', error));
         });
 
-        // VIDEO & FILTER LOGIC
+        // VIDEO & FILTER LOGIC (Keep this as is)
         const overlay = document.getElementById('video-overlay');
         const videoPlayer = document.getElementById('store-video');
         const videoTitle = document.getElementById('video-title');
@@ -231,10 +242,8 @@
             x = document.getElementsByClassName("gallery-item");
             if (c == "all") c = "";
             for (i = 0; i < x.length; i++) {
-                // Ensure we handle display property correctly for filtered items
                 if (x[i].className.indexOf(c) > -1) {
                     x[i].style.display = "block";
-                    // Add fade in animation class if needed, or simply let it appear
                     x[i].style.opacity = "1";
                     x[i].style.transform = "scale(1)";
                 } else {
@@ -242,7 +251,6 @@
                 }
             }
 
-            // Update Buttons
             var btnContainer = document.getElementById("filter-container");
             var btns = btnContainer.getElementsByClassName("filter-btn");
             for (var i = 0; i < btns.length; i++) {

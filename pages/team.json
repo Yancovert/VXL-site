@@ -1,56 +1,148 @@
 [
     {
-    "id": 1,
-    "name": "Yan Covert",
-    "role": "Lead Developer",
-    "image": "../assets/images/profile_placeholder.png",
-    "bio": "Architect.",
-    "socials": {
-        "github": "#",
-        "twitter": "#"
-    }
+        "id": 1,
+        "name": "Chakimbo",
+        "role": "Producer",
+        "image": "../assets/images/profile_placeholder.png",
+        "bio": "Architect.",
+        "socials": {
+            "twitter": "#"
+        }
     },
     {
-    "id": 2,
-    "name": "Sam_TA",
-    "role": "3D Generalist",
-    "image": "../assets/images/bot_avatar.png",
-    "bio": "Animator.",
-    "socials": {
-        "artstation": "#"
-    }
+        "id": 2,
+        "name": "Yan Covert",
+        "role": "Lead Developer",
+        "image": "../assets/images/Yancovert.png",
+        "bio": "Architect of Ruins.",
+        "socials": {
+            "github": "https://github.com/Yancovert"
+        }
     },
     {
-    "id": 3,
-    "name": "LEB_xr",
-    "role": "Supervisor.",
-    "image": "../assets/images/ui_avatar.png",
-    "bio": "Animator.",
-    "socials": {
-        "dribbble": "#",
-        "twitter": "#"
-    }
+        "id": 3,
+        "name": "Sam_TA",
+        "role": "3D Animator",
+        "image": "../assets/images/Sam.png",
+        "bio": "My favorite class is Trolldier.",
+        "socials": {
+            "youtube": "https://www.youtube.com/channel/UCa3ciQYn5wURrUB-l-yNrpw"
+        }
     },
     {
-    "id": 1,
-    "name": "Chakimbo",
-    "role": "Server Host",
-    "image": "../assets/images/profile_placeholder.png",
-    "bio": "Architect.",
-    "socials": {
-        "github": "#",
-        "twitter": "#"
-    }
+        "id": 4,
+        "name": "Sherane",
+        "role": "3D Animator",
+        "image": "../assets/images/Sherane.png",
+        "bio": "End of the world - keep walking?",
+        "socials": {
+            "artstation": "https://www.artstation.com/sherane",
+            "twitter": "https://x.com/sherane0",
+            "youtube": "https://www.youtube.com/@Sherane0"
+        }
     },
     {
-    "id": 1,
-    "name": "DragonLazer",
-    "role": "VFX Guy",
-    "image": "../assets/images/profile_placeholder.png",
-    "bio": "Lazy ahh.",
-    "socials": {
-        "github": "#",
-        "twitter": "#"
-    }
+        "id": 5,
+        "name": "LEB_xr",
+        "role": "3D Animator",
+        "image": "../assets/images/LEB.png",
+        "bio": ".",
+        "socials": {
+            "twitter": "#"
+        }
+    },
+    {
+        "id": 6,
+        "name": "SBproductionz",
+        "role": "3D Animator",
+        "image": "../assets/images/placeholder.png",
+        "bio": ".",
+        "socials": {
+            "artstation": "."
+        }
+    },
+    {
+        "id": 10,
+        "name": "Zeel Artic",
+        "role": "Pre-visualization",
+        "image": "../assets/images/Zeel.png",
+        "bio": "Greetings, I'm a 2D Animator & Storyboarder.",
+        "socials": {
+            "youtube": "https://youtube.com/@zeelartic26?",
+            "instagram": "https://www.instagram.com/zeel_artic/?"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Mavionne",
+        "role": "Pre-visualization",
+        "image": "../assets/images/placeholder.png",
+        "bio": ".",
+        "socials": {
+            "youtube": "https://youtube.com/@zeelartic26?",
+            "instagram": "https://www.instagram.com/zeel_artic/?"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Konooooooo",
+        "role": "Pre-visualization",
+        "image": "../assets/images/Jap.png",
+        "bio": "Telling stories through colours and beings is my go to :)",
+        "socials": {
+            "youtube": "https://youtube.com/@zeelartic26?",
+            "instagram": "https://www.instagram.com/zeel_artic/?"
+        }
+    },
+        {
+        "id": 7,
+        "name": "Freund",
+        "role": "Post Production",
+        "image": "../assets/images/profile_placeholder.png",
+        "bio": "Architect.",
+        "socials": {
+            "twitter": "#"
+        }
+    },
+    {
+        "id": 8,
+        "name": "Darcidious",
+        "role": "Post Production",
+        "image": "../assets/images/Darcidious.png",
+        "bio": "I am an aspiring 3D artist.",
+        "socials": {
+            "youtube": "https://www.youtube.com/channel/UCivzHkcUCFoFhvfMklGDwwA"
+        }
+    },
+    {
+        "id": 9,
+        "name": "DragonLazer",
+        "role": "Post Production",
+        "image": "../assets/images/profile_placeholder.png",
+        "bio": "Lazy ahh.",
+        "socials": {
+            "github": "#",
+            "twitter": "#"
+        }
+    },
+    {
+        "id": 10,
+        "name": "Justin Wulf",
+        "role": "Voice Acting",
+        "image": "../assets/images/VVulf.png",
+        "bio": "I'm a VA who has a lot of time and a lot more stuff to do.",
+        "socials": {
+            "youtube": "https://www.youtube.com/channel/UCCSxrnKaOfjCSz6dfCgu5Jg"
+        }
+    },
+    {
+        "id": 11,
+        "name": "Gwyn",
+        "role": "Voice Acting",
+        "image": "../assets/images/Gwyn.png",
+        "bio": "I'm Gwyn and I like voice acting and Minecraft.",
+        "socials": {
+            "youtube": "https://www.youtube.com/channel/UC6FnUBqG-h8CWiWaQ1cjX1Q"
+        }
     }
 ]

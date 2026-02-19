@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="../theme.css">
     <link rel="stylesheet" href="../styles.css">
+
     <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
@@ -20,87 +21,156 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background-color: #050505;
+            background-color: var(--bg-color);
         }
 
         /* Team Grid Layout */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem 2rem;
+            margin-top: 3rem;
+            align-items: start;
         }
 
-        /* Member Card Styling */
+        /* Member Card - Now transparent and centered */
         .member-card {
-            background: rgba(20, 20, 20, 0.8);
-            border: 1px solid #333;
-            backdrop-filter: blur(5px);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            overflow: hidden;
+            background: transparent;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            transition: transform 0.3s ease;
         }
 
         .member-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--cyber-cyan);
+            transform: translateY(-10px);
         }
 
+        /* CIRCULAR IMAGE CONTAINER */
         .member-img-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            /* Makes it circular */
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding: 5px;
+            /* Gap between image and border */
+
+            /* The "Shiny" Neon Border */
+            background: linear-gradient(135deg, var(--cyber-cyan), var(--cyber-pink));
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            /* Outer Glow */
+
+            transition: box-shadow 0.3s ease;
+        }
+
+        /* Inner circle to hold the image (creates the border effect) */
+        .img-inner {
             width: 100%;
-            height: 300px;
-            background: #111;
+            height: 100%;
+            background: #000;
+            border-radius: 50%;
             overflow: hidden;
             position: relative;
-            border-bottom: 1px solid #333;
+            z-index: 2;
         }
 
-        .member-img-container img {
+        .img-inner img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
-            opacity: 0.9;
+            object-position: top center;
+            transition: transform 0.5s ease, opacity 0.3s;
+            opacity: 0.85;
         }
 
-        .member-card:hover .member-img-container img {
-            transform: scale(1.05);
+        /* Hover Effects */
+        .member-card:hover .member-img-container {
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6), 0 0 10px var(--cyber-pink);
+        }
+
+        .member-card:hover img {
+            transform: scale(1.1);
             opacity: 1;
         }
 
+        /* Text Styling */
         .member-info {
-            padding: 1.5rem;
+            padding: 0 1rem;
+            width: 100%;
         }
 
         .member-role {
             color: var(--cyber-cyan);
             font-family: 'Pixelify Sans';
-            font-size: 0.9rem;
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
             margin-bottom: 0.5rem;
+            text-transform: uppercase;
             display: block;
+            text-shadow: 0 0 5px rgba(0, 255, 255, 0.5);
+        }
+
+        h3 {
+            color: #fff;
+            margin: 0 0 0.8rem 0;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         .member-bio {
-            color: #888;
+            color: #aaa;
             font-size: 0.9rem;
-            line-height: 1.5;
-            margin-top: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.2rem;
         }
 
+        /* Sleek Minimal Social Icons */
         .social-links {
-            margin-top: 1.5rem;
             display: flex;
-            gap: 1rem;
+            justify-content: center;
+            gap: 1.2rem;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+
+        .member-card:hover .social-links {
+            opacity: 1;
         }
 
         .social-links a {
-            color: #666;
-            font-size: 1.2rem;
-            transition: color 0.3s;
+            color: #fff;
+            font-size: 1.1rem;
+            transition: transform 0.3s, color 0.3s;
+            background: rgba(255, 255, 255, 0.1);
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
         .social-links a:hover {
+            transform: scale(1.2) rotate(10deg);
+            background: var(--cyber-cyan);
+            color: #000;
+            box-shadow: 0 0 15px var(--cyber-cyan);
+        }
+
+        /* Specific brand colors on hover (Optional override) */
+        .social-links a:hover .fa-youtube {
+            color: #cc0000;
+        }
+
+        .social-links a:hover .fa-instagram {
             color: #fff;
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
         }
     </style>
 </head>
@@ -115,13 +185,13 @@
         </a>
     </nav>
 
-    <section style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
-        <h1 class="section-title">ACTIVE PERSONNEL</h1>
+    <section style="max-width: 1200px; margin: 0 auto; padding: 0 2rem 5rem 2rem;">
+        <h1 class="section-title" style="text-align: center;">ACTIVE PERSONNEL</h1>
 
         <div class="team-grid" id="team-container"></div>
     </section>
 
-    <footer>©2026 VOXEL ANIMATION.</footer>
+    <footer style="text-align: center; padding: 2rem; color: #666;">©2026 VOXEL ANIMATION.</footer>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -130,18 +200,24 @@
                 .then(members => {
                     const container = document.getElementById('team-container');
 
+                    const iconMap = {
+                        github: 'fa-brands fa-github',
+                        twitter: 'fa-brands fa-x-twitter',
+                        artstation: 'fa-brands fa-artstation',
+                        youtube: 'fa-brands fa-youtube',
+                        instagram: 'fa-brands fa-instagram',
+                        linkedin: 'fa-brands fa-linkedin',
+                        dribbble: 'fa-brands fa-dribbble',
+                        website: 'fa-solid fa-globe'
+                    };
+
                     members.forEach(member => {
                         // Generate Social Links HTML dynamically
                         let socialHTML = '';
                         if (member.socials) {
                             for (const [platform, link] of Object.entries(member.socials)) {
-                                let iconClass = 'fa-solid fa-link'; // default
-                                if (platform === 'github') iconClass = 'fa-brands fa-github';
-                                if (platform === 'twitter') iconClass = 'fa-brands fa-x-twitter';
-                                if (platform === 'artstation') iconClass = 'fa-brands fa-artstation';
-                                if (platform === 'dribbble') iconClass = 'fa-brands fa-dribbble';
-
-                                socialHTML += `<a href="${link}" target="_blank"><i class="${iconClass}"></i></a>`;
+                                const iconClass = iconMap[platform.toLowerCase()] || 'fa-solid fa-link';
+                                socialHTML += `<a href="${link}" target="_blank" title="${platform}"><i class="${iconClass}"></i></a>`;
                             }
                         }
 
@@ -150,11 +226,13 @@
 
                         card.innerHTML = `
                             <div class="member-img-container">
-                                <img src="${member.image}" alt="${member.name}">
+                                <div class="img-inner">
+                                    <img src="${member.image}" alt="${member.name}">
+                                </div>
                             </div>
                             <div class="member-info">
-                                <span class="member-role">// ${member.role}</span>
-                                <h3 style="color: #fff; margin: 0; font-size: 1.5rem;">${member.name}</h3>
+                                <span class="member-role">${member.role}</span>
+                                <h3>${member.name}</h3>
                                 <p class="member-bio">${member.bio}</p>
                                 <div class="social-links">
                                     ${socialHTML}
@@ -228,9 +306,11 @@
             const s = Math.random() * 0.4 + 0.1;
             mesh.scale.set(s, s, s);
 
-            mesh.position.x = (Math.random() - 0.5) * 25;
-            mesh.position.y = (Math.random() - 0.5) * 15;
-            mesh.position.z = -2 - Math.random() * 8;
+            mesh.position.set(
+                (Math.random() - 0.5) * 25,
+                (Math.random() - 0.5) * 15,
+                -2 - Math.random() * 8
+            );
 
             mesh.userData = {
                 rotX: (Math.random() - 0.5) * 0.02,
