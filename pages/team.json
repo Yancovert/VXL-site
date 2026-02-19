@@ -85,6 +85,17 @@
     },
     {
         "id": 9,
+        "name": "Paul Cochrane",
+        "role": "Composer",
+        "image": "../assets/images/Paul.png",
+        "bio": "Professional music producer and award winning composer.",
+        "socials": {
+            "youtube": "https://www.youtube.com/@paul_cochrane/videos",
+            "spotify": "https://open.spotify.com/artist/3xVLW9Yo1ImNKZc40pzDAa"
+        }
+    },
+    {
+        "id": 9,
         "name": "Chavez J Chavez",
         "role": "Post Production",
         "image": "../assets/images/Chakimbo.png",
@@ -97,10 +108,10 @@
         "id": 10,
         "name": "Freund",
         "role": "Post Production",
-        "image": "../assets/images/profile_placeholder.png",
-        "bio": "Architect.",
+        "image": "../assets/images/Freund.png",
+        "bio": "why am I the guy that gets assigned every second thing?",
         "socials": {
-            "twitter": "#"
+            "artstation": "https://freund0815.artstation.com/"
         }
     },
     {
@@ -124,7 +135,7 @@
         }
     },
     {
-        "id": 17,
+        "id": 13,
         "name": "01Beaker",
         "role": "Post Production",
         "image": "../assets/images/Beaker.png",
@@ -134,7 +145,7 @@
         }
     },
     {
-        "id": 13,
+        "id": 14,
         "name": "Maxi",
         "role": "Post Production",
         "image": "../assets/images/Maxi.png",

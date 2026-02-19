@@ -13,6 +13,31 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <style>
+        body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Forces body to be at least the height of the screen */
+}
+
+section {
+    flex-grow: 1; /* This forces the section to expand and push the footer down */
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    padding: 0 2rem 5rem 2rem;
+    box-sizing: border-box;
+}
+
+footer {
+    width: 100%;
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-size: 0.8rem;
+    background: rgba(10, 10, 10, 0.8); /* Gives it that nice dark band across the bottom */
+    z-index: 10;
+}
         /* 3D Background Container */
         #canvas-container {
             position: fixed;
@@ -305,6 +330,7 @@
             composer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
+    <script src="../main.js"></script>
 </body>
 
 </html>

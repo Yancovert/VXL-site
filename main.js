@@ -297,35 +297,59 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch(error => console.error('Error loading ongoing projects:', error));
 });
 
-// --- VXL PRECISION AUDIO SYSTEM ---
+// --- VXL SYNTHESIZED AUDIO SYSTEM ---
 document.addEventListener("DOMContentLoaded", () => {
-    // 1. SMART PATH DETECTION
-    const isSubDir = document.querySelector('link[href*="../styles.css"]') !== null;
-    const soundPath = isSubDir ? '../assets/sounds/passive.mp3' : 'assets/sounds/passive.mp3';
-    
-    const passiveSound = new Audio(soundPath);
-    passiveSound.volume = 0.3;
-    
-    let activeCard = null;
-    let audioUnlocked = false;
+    // 1. Initialize the Web Audio Engine
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    const audioCtx = new AudioContext();
 
-    // 2. THE PLAY/PAUSE HACK (Fixes the hover block)
+    // 2. Build the Synthesizer (The "Cozy" Sound)
+    function playCozySound() {
+        // Create audio nodes
+        const osc = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        const filter = audioCtx.createBiquadFilter();
+
+        // Connect the nodes: Oscillator -> Filter -> Gain -> Speakers
+        osc.connect(filter);
+        filter.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+
+        // -- Sound Design --
+        // A Sine wave gives a smooth, round tone (not harsh like techy clicks)
+        osc.type = 'sine'; 
+        // Start at 150Hz and drop to 40Hz rapidly (creates a subtle "thud" or "pop")
+        osc.frequency.setValueAtTime(150, audioCtx.currentTime); 
+        osc.frequency.exponentialRampToValueAtTime(40, audioCtx.currentTime + 0.1);
+
+        // Apply a lowpass filter to muffle it so it sounds distant/cozy
+        filter.type = 'lowpass';
+        filter.frequency.value = 500;
+
+        // Volume Envelope: Quick fade in, quick fade out
+        gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+        gainNode.gain.linearRampToValueAtTime(0.15, audioCtx.currentTime + 0.02); // 0.15 is the volume
+        gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+
+        // Play and stop
+        osc.start(audioCtx.currentTime);
+        osc.stop(audioCtx.currentTime + 0.2);
+    }
+
+    // 3. Unlock the Engine
+    // Browsers suspend the audio engine until the user clicks somewhere.
+    // This wakes it up permanently on the first click.
     document.addEventListener('click', () => {
-        if (!audioUnlocked) {
-            // We force the browser to authorize the audio by playing it on a direct click
-            passiveSound.play().then(() => {
-                // Immediately pause it and rewind so the user doesn't hear it
-                passiveSound.pause();
-                passiveSound.currentTime = 0;
-                audioUnlocked = true;
-            }).catch(err => {
-                console.warn("Could not unlock audio:", err);
-            });
+        if (audioCtx.state === 'suspended') {
+            audioCtx.resume();
         }
-    }, { once: true }); // Only runs on the very first click
+    }, { once: true });
 
-    // 3. PRECISION HOVER DELEGATION
+    // 4. Precision Hover Detection
+    let activeCard = null;
+
     document.addEventListener('mouseover', (e) => {
+        // Target exactly the cards we want
         const card = e.target.closest('.member-card, .gallery-item, .event-card, .script-card');
         
         if (!card) {
@@ -333,19 +357,20 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
+        // Exclude buttons and links inside those cards
         const isHoveringButton = e.target.closest('button, a, .btn, .resource-item, .action-btn, .filter-btn');
         if (isHoveringButton) {
             activeCard = null;
             return;
         }
 
+        // Trigger the synth!
         if (activeCard !== card) {
             activeCard = card;
             
-            // Only play if the click hack has successfully unlocked the audio
-            if (audioUnlocked) {
-                passiveSound.currentTime = 0;
-                passiveSound.play().catch(() => {});
+            // Only play if the user has unlocked the audio context
+            if (audioCtx.state === 'running') {
+                playCozySound();
             }
         }
     });
