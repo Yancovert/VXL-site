@@ -296,3 +296,57 @@ document.addEventListener("DOMContentLoaded", () => {
         })
         .catch(error => console.error('Error loading ongoing projects:', error));
 });
+
+// --- VXL PRECISION AUDIO SYSTEM ---
+document.addEventListener("DOMContentLoaded", () => {
+    // 1. SMART PATH DETECTION
+    const isSubDir = document.querySelector('link[href*="../styles.css"]') !== null;
+    const soundPath = isSubDir ? '../assets/sounds/passive.mp3' : 'assets/sounds/passive.mp3';
+    
+    const passiveSound = new Audio(soundPath);
+    passiveSound.volume = 0.3;
+    
+    let activeCard = null;
+    let audioUnlocked = false;
+
+    // 2. THE PLAY/PAUSE HACK (Fixes the hover block)
+    document.addEventListener('click', () => {
+        if (!audioUnlocked) {
+            // We force the browser to authorize the audio by playing it on a direct click
+            passiveSound.play().then(() => {
+                // Immediately pause it and rewind so the user doesn't hear it
+                passiveSound.pause();
+                passiveSound.currentTime = 0;
+                audioUnlocked = true;
+            }).catch(err => {
+                console.warn("Could not unlock audio:", err);
+            });
+        }
+    }, { once: true }); // Only runs on the very first click
+
+    // 3. PRECISION HOVER DELEGATION
+    document.addEventListener('mouseover', (e) => {
+        const card = e.target.closest('.member-card, .gallery-item, .event-card, .script-card');
+        
+        if (!card) {
+            activeCard = null;
+            return;
+        }
+
+        const isHoveringButton = e.target.closest('button, a, .btn, .resource-item, .action-btn, .filter-btn');
+        if (isHoveringButton) {
+            activeCard = null;
+            return;
+        }
+
+        if (activeCard !== card) {
+            activeCard = card;
+            
+            // Only play if the click hack has successfully unlocked the audio
+            if (audioUnlocked) {
+                passiveSound.currentTime = 0;
+                passiveSound.play().catch(() => {});
+            }
+        }
+    });
+});
