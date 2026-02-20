@@ -193,39 +193,50 @@
 
     <footer style="text-align: center; padding: 2rem; color: #666;">©2026 VOXEL ANIMATION.</footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            fetch('team.json')
-                .then(response => response.json())
-                .then(members => {
-                    const container = document.getElementById('team-container');
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        fetch('team.json')
+            .then(response => response.json())
+            .then(members => {
+                const container = document.getElementById('team-container');
 
-                    const iconMap = {
-                        github: 'fa-brands fa-github',
-                        twitter: 'fa-brands fa-x-twitter',
-                        artstation: 'fa-brands fa-artstation',
-                        youtube: 'fa-brands fa-youtube',
-                        instagram: 'fa-brands fa-instagram',
-                        linkedin: 'fa-brands fa-linkedin',
-                        dribbble: 'fa-brands fa-dribbble',
-                        spotify: 'fa-brands fa-spotify',
-                        website: 'fa-solid fa-globe'
-                    };
+                const iconMap = {
+                    github: 'fa-brands fa-github',
+                    twitter: 'fa-brands fa-x-twitter',
+                    artstation: 'fa-brands fa-artstation',
+                    youtube: 'fa-brands fa-youtube',
+                    instagram: 'fa-brands fa-instagram',
+                    linkedin: 'fa-brands fa-linkedin',
+                    dribbble: 'fa-brands fa-dribbble',
+                    website: 'fa-solid fa-globe'
+                };
 
-                    members.forEach(member => {
-                        // Generate Social Links HTML dynamically
-                        let socialHTML = '';
-                        if (member.socials) {
-                            for (const [platform, link] of Object.entries(member.socials)) {
-                                const iconClass = iconMap[platform.toLowerCase()] || 'fa-solid fa-link';
-                                socialHTML += `<a href="${link}" target="_blank" title="${platform}"><i class="${iconClass}"></i></a>`;
-                            }
+                members.forEach(member => {
+                    // 1. SELECT A RANDOM BIO
+                    // We use Math.random() to pick a random index from the bio array
+                    let selectedBio = "Data redacted."; // Fallback
+                    if (Array.isArray(member.bio)) {
+                        const randomIndex = Math.floor(Math.random() * member.bio.length);
+                        selectedBio = member.bio[randomIndex];
+                    } else {
+                        // If you accidentally leave one as a simple string, it won't break
+                        selectedBio = member.bio;
+                    }
+
+                    // 2. GENERATE SOCIALS
+                    let socialHTML = '';
+                    if (member.socials) {
+                        for (const [platform, link] of Object.entries(member.socials)) {
+                            const iconClass = iconMap[platform.toLowerCase()] || 'fa-solid fa-link';
+                            socialHTML += `<a href="${link}" target="_blank" title="${platform}"><i class="${iconClass}"></i></a>`;
                         }
+                    }
 
-                        const card = document.createElement('div');
-                        card.className = 'member-card';
+                    // 3. BUILD THE CARD
+                    const card = document.createElement('div');
+                    card.className = 'member-card';
 
-                        card.innerHTML = `
+                    card.innerHTML = `
                             <div class="member-img-container">
                                 <div class="img-inner">
                                     <img src="${member.image}" alt="${member.name}">
@@ -234,19 +245,19 @@
                             <div class="member-info">
                                 <span class="member-role">${member.role}</span>
                                 <h3>${member.name}</h3>
-                                <p class="member-bio">${member.bio}</p>
+                                <p class="member-bio">${selectedBio}</p>
                                 <div class="social-links">
                                     ${socialHTML}
                                 </div>
                             </div>
                         `;
 
-                        container.appendChild(card);
-                    });
-                })
-                .catch(error => console.error('Error loading team:', error));
-        });
-    </script>
+                    container.appendChild(card);
+                });
+            })
+            .catch(error => console.error('Error loading team:', error));
+    });
+</script>
 
     <script type="importmap">
         {

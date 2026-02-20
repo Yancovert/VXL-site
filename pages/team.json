@@ -120,7 +120,8 @@
         "name": "Freund",
         "role": "Post Production",
         "image": "../assets/images/Freund.png",
-        "bio": "Where's my money?",
+        "bio": ["Where's my money?", "I hate Yan."],
+        
         "socials": {
             "artstation": "https://freund0815.artstation.com/"
         }
@@ -139,8 +140,8 @@
         "id": 14,
         "name": "DragonLazer",
         "role": "Post Production",
-        "image": "../assets/images/profile_placeholder.png",
-        "bio": "Lazy ahh.",
+        "image": "../assets/images/Lazer.png",
+        "bio": ["Im an aspiring VFX artis and avid CG enthusiast"],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCAiSJdRiV8rw9eDZH9V8piA"
         }
