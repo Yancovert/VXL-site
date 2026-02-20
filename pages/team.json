@@ -4,7 +4,7 @@
         "name": "Yan Covert",
         "role": "Lead Developer",
         "image": "../assets/images/Yancovert.png",
-        "bio": "Architect of Ruins.",
+        "bio": ["Architect of Ruins.", "I write..."],
         "socials": {
             "github": "https://github.com/Yancovert"
         }
@@ -14,7 +14,7 @@
         "name": "Sam_TA",
         "role": "3D Animator",
         "image": "../assets/images/Sam.png",
-        "bio": "My favorite class is Trolldier.",
+        "bio": ["My favorite class is Trolldier."],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCa3ciQYn5wURrUB-l-yNrpw"
         }
@@ -24,7 +24,7 @@
         "name": "Sherane",
         "role": "3D Animator",
         "image": "../assets/images/Sherane.png",
-        "bio": "End of the world - keep walking?",
+        "bio": ["End of the world - keep walking?"],
         "socials": {
             "artstation": "https://www.artstation.com/sherane",
             "twitter": "https://x.com/sherane0",
@@ -36,7 +36,7 @@
         "name": "LEB_xr",
         "role": "3D Animator",
         "image": "../assets/images/LEB.png",
-        "bio": ".",
+        "bio": ["The country mouse."],
         "socials": {
             "twitter": "#"
         }
@@ -46,7 +46,7 @@
         "name": "SBproductionz",
         "role": "3D Animator",
         "image": "../assets/images/SBprod.png",
-        "bio": ".",
+        "bio": ["I'm a 3D animator who makes funny lego animations and sometimes other stuff."],
         "socials": {
             "youtube": "https://www.youtube.com/@Lego_SB",
             "instagram": "https://www.instagram.com/lego_sb_productionz/"
@@ -57,7 +57,7 @@
         "name": "Lucky",
         "role": "3D Animator",
         "image": "../assets/images/Lucky.png",
-        "bio": "Welcome to Costco i love you.",
+        "bio": ["Welcome to Costco i love you."],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCa3ciQYn5wURrUB-l-yNrpw"
         }
@@ -67,7 +67,7 @@
         "name": "Zeel Artic",
         "role": "Pre-visualization",
         "image": "../assets/images/Zeel.png",
-        "bio": "Greetings, I'm a 2D Animator & Storyboarder.",
+        "bio": ["Greetings, I'm a 2D Animator & Storyboarder."],
         "socials": {
             "youtube": "https://youtube.com/@zeelartic26?",
             "instagram": "https://www.instagram.com/zeel_artic/?"
@@ -78,7 +78,7 @@
         "name": "Mavionne",
         "role": "Pre-visualization",
         "image": "../assets/images/Mavionne.png",
-        "bio": "Storyboard artist, writer, and cat lover :D",
+        "bio": ["Storyboard artist, writer, and cat lover :D"],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UC2vNVXLXYXbsO_xSW8Aw-Vw",
             "website": "https://mavionne.com/"
@@ -89,7 +89,7 @@
         "name": "Konooooooo",
         "role": "Pre-visualization",
         "image": "../assets/images/Jap.png",
-        "bio": "Telling stories through colours and beings is my go to :)",
+        "bio": ["Telling stories through colours and beings is my go to :)"],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCJJWNVW3FwpmDPEOdtuD46w"
         }
@@ -99,7 +99,7 @@
         "name": "Paul Cochrane",
         "role": "Composer",
         "image": "../assets/images/Paul.png",
-        "bio": "Professional music producer and award winning composer.",
+        "bio": ["Professional music producer and award winning composer."],
         "socials": {
             "youtube": "https://www.youtube.com/@paul_cochrane/videos",
             "spotify": "https://open.spotify.com/artist/3xVLW9Yo1ImNKZc40pzDAa"
@@ -110,7 +110,7 @@
         "name": "Chavez J Chavez",
         "role": "Post Production",
         "image": "../assets/images/Chakimbo.png",
-        "bio": "Just doing what I can, when I can",
+        "bio": ["Just doing what I can, when I can"],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCbJH1uniBCCEYv0D2JraRaw"
         }
@@ -131,7 +131,7 @@
         "name": "Darcidious",
         "role": "Post Production",
         "image": "../assets/images/Darcidious.png",
-        "bio": "I am an aspiring 3D artist.",
+        "bio": ["I am an aspiring 3D artist."],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCivzHkcUCFoFhvfMklGDwwA"
         }
@@ -141,7 +141,7 @@
         "name": "DragonLazer",
         "role": "Post Production",
         "image": "../assets/images/Lazer.png",
-        "bio": ["Im an aspiring VFX artis and avid CG enthusiast"],
+        "bio": ["I'm an aspiring VFX artist and an avid CG enthusiast"],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCAiSJdRiV8rw9eDZH9V8piA"
         }
@@ -151,7 +151,7 @@
         "name": "01Beaker",
         "role": "Post Production",
         "image": "../assets/images/Beaker.png",
-        "bio": "Editor, 3D artist, onewheel.",
+        "bio": ["Editor, 3D artist, onewheel."],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCWaVhzQPM4lxPQ1MoR0f_gg"
         }
@@ -161,7 +161,7 @@
         "name": "Maxi",
         "role": "Post Production",
         "image": "../assets/images/Maxi.png",
-        "bio": "Capitalism.",
+        "bio": ["Capitalism."],
         "socials": {
             "youtube": "https://www.youtube.com/@Maxi_exists"
         }
@@ -171,7 +171,7 @@
         "name": "Justin Wulf",
         "role": "Voice Acting",
         "image": "../assets/images/VVulf.png",
-        "bio": "I'm a VA who has a lot of time and a lot more stuff to do.",
+        "bio": ["I'm a VA who has a lot of time and a lot more stuff to do."],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UCCSxrnKaOfjCSz6dfCgu5Jg"
         }
@@ -181,17 +181,27 @@
         "name": "Gwyn",
         "role": "Voice Acting",
         "image": "../assets/images/Gwyn.png",
-        "bio": "I'm Gwyn and I like voice acting and Minecraft.",
+        "bio": ["I'm Gwyn and I like voice acting and Minecraft."],
         "socials": {
             "youtube": "https://www.youtube.com/channel/UC6FnUBqG-h8CWiWaQ1cjX1Q"
         }
     },
-    {
+        {
         "id": 19,
+        "name": "Arminmack",
+        "role": "Voice Acting",
+        "image": "../assets/images/Armin.png",
+        "bio": ["Voice actor being a voice."],
+        "socials": {
+            "youtube": ""
+        }
+    },
+    {
+        "id": 20,
         "name": "GoldenMammon",
         "role": "Set Builder",
         "image": "../assets/images/Goldenmammon.png",
-        "bio": "I build stuff and make music.",
+        "bio": ["I build stuff and make music."],
         "socials": {
             "youtube": "https://www.youtube.com/@goldenmammon"
         }
